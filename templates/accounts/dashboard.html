@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cyvora - Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .navbar {
+            background: #1f6feb;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #666;
+        }
+
+        .card a {
+            color: #1f6feb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>Cyvora</h2>
+        <a href="{% url 'logout' %}" class="logout">Logout</a>
+    </div>
+
+    <div class="container">
+
+        <div class="welcome">
+            <h1>Welcome to Cyvora</h1>
+            <p>
+                AI Cybersecurity Intelligence & Vulnerability
+                Prioritization Platform
+            </p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Vulnerabilities</h3>
+                <p>
+                    View and manage cybersecurity vulnerabilities.
+                </p>
+                <a href="{% url 'vulnerabilities' %}">
+                    Open Vulnerabilities
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Technology Stack</h3>
+                <p>
+                    Manage your organization's technology stack.
+                </p>
+                <a href="{% url 'technology' %}">
+                    Manage Technology Stack
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Reports</h3>
+                <p>
+                    Generate and download vulnerability reports.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

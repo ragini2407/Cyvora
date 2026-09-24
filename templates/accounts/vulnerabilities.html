@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cyvora - Vulnerabilities</title>
+    <link rel="stylesheet" href="{% static 'accounts/vulnerabilities.css' %}">
+</head>
+
+<body>
+    <a href="{% url 'dashboard' %}" class="back-link">← Back to Dashboard</a>
+    <h1>Vulnerabilities</h1>
+    <p class="subtitle">CVEs sorted by severity — highest priority shown first.</p>
+
+    {% if vulnerabilities %}
+    <table>
+        <thead>
+            <tr>
+                <th>CVE ID</th>
+                <th>Relevance</th>
+                <th>Description</th>
+                <th>Severity</th>
+                <th>CVSS Score</th>
+                <th>Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vuln in vulnerabilities %}
+            <tr>
+                <td><strong>{{ vuln.cve_id }}</strong></td>
+                <td>
+                    {% if vuln.is_relevant %}
+                    <span
+                        style="background:#1f6feb; color:white; padding:3px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">
+                        {{ vuln.matched_tech }}
+                    </span>
+                    {% endif %}
+                </td>
+                <td class="description">
+                    {{ vuln.description|truncatewords:20 }}
+                    {% if vuln.ai_summary %}
+                    <div class="ai-box">
+                        <strong>AI Summary:</strong> {{ vuln.ai_summary }}
+                    </div>
+                    <div class="ai-box recommendation">
+                        <strong>Recommendation:</strong> {{ vuln.ai_recommendation }}
+                    </div>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if vuln.severity == "CRITICAL" %}
+                    <span class="badge badge-critical">CRITICAL</span>
+                    {% elif vuln.severity == "HIGH" %}
+                    <span class="badge badge-high">HIGH</span>
+                    {% elif vuln.severity == "MEDIUM" %}
+                    <span class="badge badge-medium">MEDIUM</span>
+                    {% elif vuln.severity == "LOW" %}
+                    <span class="badge badge-low">LOW</span>
+                    {% else %}
+                    <span class="badge badge-unknown">N/A</span>
+                    {% endif %}
+                </td>
+                <td class="score">{{ vuln.cvss_score|default:"—" }}</td>
+                <td>{{ vuln.published_date|date:"d M Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <p>No vulnerabilities found. Run <code>python manage.py fetch_cves</code> to fetch data from NVD.</p>
+    </div>
+    {% endif %}
+</body>
+
+</html>

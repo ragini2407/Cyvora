@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cyvora - Technology Stack</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #1f6feb;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .logout {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Main container */
+        .container {
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .header h1 {
+            margin-top: 0;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        /* Technology cards */
+        .technology-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .technology-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .technology-card h3 {
+            margin-top: 0;
+            color: #1f6feb;
+        }
+
+        .technology-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .technology-card button {
+            margin-top: 10px;
+            padding: 9px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #1f6feb;
+            color: white;
+            cursor: pointer;
+        }
+
+        .technology-card button:hover {
+            background: #1557b0;
+        }
+
+        /* Added technologies list */
+        .tech-list {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .tech-list div {
+            padding: 5px 0;
+            border-top: 1px solid #eee;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        .modal-box h3 {
+            margin-top: 0;
+        }
+
+        .modal-box label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .modal-box input,
+        .modal-box textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 9px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: #1f6feb;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #eee;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .technology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 5px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+
+        <h2>Cyvora</h2>
+
+        <div class="nav-links">
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'vulnerabilities' %}">
+                Vulnerabilities
+            </a>
+
+            <a href="{% url 'technology' %}">
+                Technology Stack
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <div class="header">
+
+            <h1>Technology Stack</h1>
+
+            <p>
+                Add and manage the technologies used by your organization.
+                This information can later be used to identify relevant
+                cybersecurity vulnerabilities.
+            </p>
+
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        <p style="color: green; background: white; padding: 10px 15px; border-radius: 5px;">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+
+
+        <!-- Technology Cards -->
+        <div class="technology-grid">
+
+            <div class="technology-card">
+
+                <h3>Operating Systems</h3>
+
+                <p>
+                    Track operating systems such as Windows,
+                    Linux and macOS used in the organization.
+                </p>
+
+                <button onclick="openModal('os')">
+                    Add Technology
+                </button>
+
+                <div class="tech-list">
+                    {% for tech in grouped.os %}
+                    <div>{{ tech.name }} {% if tech.version %}({{ tech.version }}){% endif %}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="technology-card">
+
+                <h3>Web Technologies</h3>
+
+                <p>
+                    Manage web servers, frameworks and technologies
+                    used by the organization.
+                </p>
+
+                <button onclick="openModal('web')">
+                    Add Technology
+                </button>
+
+                <div class="tech-list">
+                    {% for tech in grouped.web %}
+                    <div>{{ tech.name }} {% if tech.version %}({{ tech.version }}){% endif %}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="technology-card">
+
+                <h3>Databases</h3>
+
+                <p>
+                    Track databases such as PostgreSQL,
+                    MySQL and MongoDB.
+                </p>
+
+                <button onclick="openModal('database')">
+                    Add Technology
+                </button>
+
+                <div class="tech-list">
+                    {% for tech in grouped.database %}
+                    <div>{{ tech.name }} {% if tech.version %}({{ tech.version }}){% endif %}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="technology-card">
+
+                <h3>Programming Languages</h3>
+
+                <p>
+                    Maintain information about programming languages
+                    such as Python, Java and JavaScript.
+                </p>
+
+                <button onclick="openModal('language')">
+                    Add Technology
+                </button>
+
+                <div class="tech-list">
+                    {% for tech in grouped.language %}
+                    <div>{{ tech.name }} {% if tech.version %}({{ tech.version }}){% endif %}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="technology-card">
+
+                <h3>Cloud Platforms</h3>
+
+                <p>
+                    Track cloud technologies and platforms
+                    used by the organization.
+                </p>
+
+                <button onclick="openModal('cloud')">
+                    Add Technology
+                </button>
+
+                <div class="tech-list">
+                    {% for tech in grouped.cloud %}
+                    <div>{{ tech.name }} {% if tech.version %}({{ tech.version }}){% endif %}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="technology-card">
+
+                <h3>Security Tools</h3>
+
+                <p>
+                    Manage security tools and infrastructure
+                    used for cybersecurity operations.
+                </p>
+
+                <button onclick="openModal('security')">
+                    Add Technology
+                </button>
+
+                <div class="tech-list">
+                    {% for tech in grouped.security %}
+                    <div>{{ tech.name }} {% if tech.version %}({{ tech.version }}){% endif %}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="techModal">
+        <div class="modal-box">
+            <h3>Add Technology</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="category" id="modalCategory">
+
+                <label for="modalName">Name</label>
+                <input type="text" name="name" id="modalName" required placeholder="e.g. Windows Server">
+
+                <label for="modalVersion">Version (optional)</label>
+                <input type="text" name="version" id="modalVersion" placeholder="e.g. 2022">
+
+                <label for="modalDescription">Description (optional)</label>
+                <textarea name="description" id="modalDescription" rows="2"></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(category) {
+            document.getElementById('modalCategory').value = category;
+            document.getElementById('techModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('techModal').classList.remove('active');
+        }
+    </script>
+
+</body>
+
+</html>
