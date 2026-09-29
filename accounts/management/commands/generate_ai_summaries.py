@@ -5,23 +5,69 @@ import time
 
 
 class Command(BaseCommand):
-    help = "Generate AI summaries and recommendations for vulnerabilities missing them"
+    help = "Generate AI summaries and recommendations for vulnerabilities"
 
     def handle(self, *args, **options):
-        vulnerabilities = Vulnerability.objects.filter(ai_summary__isnull=True) | Vulnerability.objects.filter(ai_summary="")
 
+        vulnerabilities = Vulnerability.objects.all()
         total = vulnerabilities.count()
-        self.stdout.write(f"Generating AI summaries for {total} vulnerabilities...")
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Generating AI summaries for {total} vulnerabilities..."
+            )
+        )
+
+        success = 0
+        failed = 0
 
         for i, vuln in enumerate(vulnerabilities, start=1):
+
+            # Already valid AI summary hai to skip
+            if (
+                vuln.ai_summary
+                and not vuln.ai_summary.startswith("Error generating summary:")
+            ):
+                self.stdout.write(
+                    f"[{i}/{total}] {vuln.cve_id} - already done, skipped."
+                )
+                success += 1
+                continue
+
             summary, recommendation = generate_ai_summary_and_recommendation(
-                vuln.cve_id, vuln.description, vuln.severity, vuln.cvss_score
+                vuln.cve_id,
+                vuln.description,
+                vuln.severity,
+                vuln.cvss_score
             )
+
+            # Error ko database mein save MAT karo
+            if summary.startswith("Error generating summary:"):
+                self.stdout.write(
+                    self.style.ERROR(
+                        f"[{i}/{total}] {vuln.cve_id} - AI FAILED"
+                    )
+                )
+                failed += 1
+                continue
+
             vuln.ai_summary = summary
             vuln.ai_recommendation = recommendation
             vuln.save()
 
-            self.stdout.write(f"[{i}/{total}] {vuln.cve_id} done.")
+            success += 1
+
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"[{i}/{total}] {vuln.cve_id} - AI done."
+                )
+            )
+
             time.sleep(1)
 
-        self.stdout.write(self.style.SUCCESS("All AI summaries generated."))
+        self.stdout.write("")
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Completed! Success: {success} | Failed: {failed}"
+            )
+        )

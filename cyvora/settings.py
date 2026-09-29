@@ -106,7 +106,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("DB_NAME", "cyvora_db"),
         "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "PASSWORD": os.getenv("DB_PASSWORD","postgres"),
         "HOST": os.getenv("DB_HOST", "localhost"),
         "PORT": os.getenv("DB_PORT", "5432"),
     }
@@ -164,4 +164,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # GROQ AI API
 # =========================================================
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
