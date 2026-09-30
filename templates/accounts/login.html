@@ -8,152 +8,667 @@
     <title>Cyvora - Login</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(37, 99, 235, .18), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(14, 165, 233, .12), transparent 30%),
+                #071326;
+            color: #172033;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
         }
 
-        .container {
-            width: 400px;
-            margin: 100px auto;
+
+        /* ================= MAIN WRAPPER ================= */
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 980px;
+            min-height: 590px;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, .35);
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
 
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
+        /* ================= LEFT PANEL ================= */
 
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 11px;
-            border: none;
-            border-radius: 5px;
-            background: #1f6feb;
+        .security-panel {
+            position: relative;
+            padding: 50px;
+            background:
+                linear-gradient(145deg,
+                    #071326,
+                    #0c2852,
+                    #1554a8);
             color: white;
-            font-size: 16px;
-            cursor: pointer;
+            overflow: hidden;
         }
 
-        button:hover {
-            background: #1558b0;
+        .security-panel::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 50%;
+            right: -90px;
+            top: -80px;
         }
 
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
+        .security-panel::after {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: 50%;
+            left: -190px;
+            bottom: -200px;
         }
+
+
+        /* ================= BRAND ================= */
+
+        .brand {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 11px;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, .35);
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        .brand-subtitle {
+            margin-top: 3px;
+            color: #8fb8ef;
+            font-size: 7px;
+            letter-spacing: 1.2px;
+        }
+
+
+        /* ================= LEFT CONTENT ================= */
+
+        .security-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 90px;
+        }
+
+        .security-label {
+            color: #80b8ff;
+            font-size: 8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .security-content h1 {
+            margin: 0;
+            max-width: 390px;
+            font-size: 38px;
+            line-height: 1.12;
+        }
+
+        .security-content h1 span {
+            color: #60a5fa;
+        }
+
+        .security-content p {
+            max-width: 400px;
+            margin-top: 18px;
+            color: #c3d2e7;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .feature-list {
+            margin-top: 32px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #dbeafe;
+            font-size: 9px;
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            border-radius: 7px;
+            background: rgba(255, 255, 255, .09);
+            border: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+
+        /* ================= RIGHT PANEL ================= */
+
+        .login-panel {
+            padding: 50px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+
+        .login-heading {
+            margin-bottom: 28px;
+        }
+
+        .login-heading .small-label {
+            color: #2563eb;
+            font-size: 8px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .login-heading h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #172033;
+        }
+
+        .login-heading p {
+            margin: 8px 0 0;
+            color: #64748b;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+
+        /* ================= MESSAGES ================= */
 
         .messages {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+        }
+
+        .error,
+        .success {
+            margin: 0 0 8px;
+            padding: 9px 11px;
+            border-radius: 7px;
+            font-size: 9px;
         }
 
         .error {
-            color: #d93025;
-            text-align: center;
-            margin-bottom: 10px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
         }
 
         .success {
-            color: #188038;
+            background: #ecfdf5;
+            border: 1px solid #bbf7d0;
+            color: #15803d;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #334155;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 44px;
+            padding: 0 13px;
+            border: 1px solid #dbe3ed;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: #172033;
+            outline: none;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            transition: .2s ease;
+        }
+
+        .input-wrapper input:focus {
+            background: white;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .09);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #a0aab8;
+        }
+
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-button {
+            width: 100%;
+            height: 44px;
+            margin-top: 7px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg,
+                    #2563eb,
+                    #1859b8);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 7px 18px rgba(37, 99, 235, .22);
+            transition: .2s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, .3);
+        }
+
+
+        /* ================= REGISTER ================= */
+
+        .register-link {
+            margin-top: 23px;
+            padding-top: 20px;
+            border-top: 1px solid #edf1f6;
             text-align: center;
-            margin-bottom: 10px;
+            color: #64748b;
+            font-size: 9px;
+        }
+
+        .register-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================= SECURITY NOTE ================= */
+
+        .security-note {
+            margin-top: 25px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #f8fafc;
+            border: 1px solid #edf1f6;
+            color: #94a3b8;
+            font-size: 8px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 760px) {
+
+            body {
+                padding: 15px;
+                align-items: flex-start;
+            }
+
+            .auth-wrapper {
+                display: block;
+                max-width: 430px;
+                min-height: auto;
+                margin: 15px auto;
+                border-radius: 18px;
+            }
+
+            .security-panel {
+                padding: 28px 25px;
+                min-height: 245px;
+            }
+
+            .security-content {
+                margin-top: 35px;
+            }
+
+            .security-content h1 {
+                font-size: 25px;
+            }
+
+            .security-content p {
+                margin-top: 10px;
+                font-size: 9px;
+            }
+
+            .feature-list {
+                display: none;
+            }
+
+            .login-panel {
+                padding: 30px 25px 28px;
+            }
+
+            .login-heading h2 {
+                font-size: 24px;
+            }
+
+            .hero-icon {
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 420px) {
+
+            body {
+                padding: 8px;
+            }
+
+            .security-panel {
+                padding: 25px 20px;
+            }
+
+            .login-panel {
+                padding: 26px 20px;
+            }
+
+            .brand-name {
+                font-size: 17px;
+            }
+
+            .security-content h1 {
+                font-size: 23px;
+            }
+
         }
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="container">
 
-        <h1>Cyvora</h1>
+    <div class="auth-wrapper">
 
-        <p class="subtitle">
-            Login to your account
-        </p>
 
-        <!-- Django Messages -->
-        {% if messages %}
-        <div class="messages">
+        <!-- ================================================= -->
+        <!-- LEFT SECURITY PANEL -->
+        <!-- ================================================= -->
 
-            {% for message in messages %}
+        <section class="security-panel">
 
-            {% if message.tags == "error" %}
-            <p class="error">{{ message }}</p>
-            {% else %}
-            <p class="success">{{ message }}</p>
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    C
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        CYVORA
+                    </div>
+
+                    <div class="brand-subtitle">
+                        AI CYBERSECURITY INTELLIGENCE
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="security-content">
+
+                <div class="security-label">
+                    SECURITY INTELLIGENCE PLATFORM
+                </div>
+
+                <h1>
+                    Protect your
+                    <span>digital environment.</span>
+                </h1>
+
+                <p>
+                    Centralize vulnerability intelligence, analyze
+                    security risks and prioritize threats using
+                    technology-aware security analysis.
+                </p>
+
+
+                <div class="feature-list">
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ◈
+                        </div>
+
+                        NVD Vulnerability Intelligence
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            AI
+                        </div>
+
+                        AI-Powered Vulnerability Analysis
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+
+                        Risk & Priority Assessment
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ▣
+                        </div>
+
+                        Security Reporting
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- RIGHT LOGIN PANEL -->
+        <!-- ================================================= -->
+
+        <section class="login-panel">
+
+
+            <div class="login-heading">
+
+                <div class="small-label">
+                    SECURE ACCESS
+                </div>
+
+                <h2>
+                    Welcome back
+                </h2>
+
+                <p>
+                    Sign in to access your Cyvora security dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- ================= DJANGO MESSAGES ================= -->
+
+            {% if messages %}
+
+            <div class="messages">
+
+                {% for message in messages %}
+
+                {% if message.tags == "error" %}
+
+                <p class="error">
+                    {{ message }}
+                </p>
+
+                {% else %}
+
+                <p class="success">
+                    {{ message }}
+                </p>
+
+                {% endif %}
+
+                {% endfor %}
+
+            </div>
+
             {% endif %}
 
-            {% endfor %}
-
-        </div>
-        {% endif %}
 
 
-        <!-- Login Form -->
-        <form method="POST">
+            <!-- ================= LOGIN FORM ================= -->
 
-            {% csrf_token %}
+            <form method="POST">
 
-            <label for="username">
-                Username
-            </label>
-
-            <input type="text" id="username" name="username" placeholder="Enter username" required>
+                {% csrf_token %}
 
 
-            <label for="password">
-                Password
-            </label>
+                <div class="form-group">
 
-            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input type="text" id="username" name="username" placeholder="Enter your username"
+                            autocomplete="username" required>
+
+                    </div>
+
+                </div>
 
 
-            <button type="submit">
-                Login
-            </button>
 
-        </form>
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input type="password" id="password" name="password" placeholder="Enter your password"
+                            autocomplete="current-password" required>
+
+                    </div>
+
+                </div>
 
 
-        <!-- Register Link -->
-        <div class="register-link">
 
-            Don't have an account?
+                <button type="submit" class="login-button">
+                    Sign In →
+                </button>
 
-            <a href="{% url 'register' %}">
-                Create Account
-            </a>
+            </form>
 
-        </div>
+
+
+            <!-- ================= REGISTER ================= -->
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="{% url 'register' %}">
+                    Create Account
+                </a>
+
+            </div>
+
+
+
+            <!-- ================= SECURITY NOTE ================= -->
+
+            <div class="security-note">
+
+                🔒 Your security intelligence workspace is protected
+                by authenticated access.
+
+            </div>
+
+
+        </section>
+
 
     </div>
+
 
 </body>
 

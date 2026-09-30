@@ -1,77 +1,452 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Cyvora - Vulnerabilities</title>
-    <link rel="stylesheet" href="{% static 'accounts/vulnerabilities.css' %}">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cyvora - Vulnerability Intelligence</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/vulnerabilities.css' %}?v=3">
 
 <body>
-    <a href="{% url 'dashboard' %}" class="back-link">← Back to Dashboard</a>
-    <h1>Vulnerabilities</h1>
-    <p class="subtitle">CVEs sorted by severity — highest priority shown first.</p>
 
-    {% if vulnerabilities %}
-    <table>
-        <thead>
-            <tr>
-                <th>CVE ID</th>
-                <th>Relevance</th>
-                <th>Description</th>
-                <th>Severity</th>
-                <th>CVSS Score</th>
-                <th>Published</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for vuln in vulnerabilities %}
-            <tr>
-                <td><strong>{{ vuln.cve_id }}</strong></td>
-                <td>
-                    {% if vuln.is_relevant %}
-                    <span
-                        style="background:#1f6feb; color:white; padding:3px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">
-                        {{ vuln.matched_tech }}
-                    </span>
-                    {% endif %}
-                </td>
-                <td class="description">
-                    {{ vuln.description|truncatewords:20 }}
-                    {% if vuln.ai_summary %}
-                    <div class="ai-box">
-                        <strong>AI Summary:</strong> {{ vuln.ai_summary }}
-                    </div>
-                    <div class="ai-box recommendation">
-                        <strong>Recommendation:</strong> {{ vuln.ai_recommendation }}
-                    </div>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if vuln.severity == "CRITICAL" %}
-                    <span class="badge badge-critical">CRITICAL</span>
-                    {% elif vuln.severity == "HIGH" %}
-                    <span class="badge badge-high">HIGH</span>
-                    {% elif vuln.severity == "MEDIUM" %}
-                    <span class="badge badge-medium">MEDIUM</span>
-                    {% elif vuln.severity == "LOW" %}
-                    <span class="badge badge-low">LOW</span>
-                    {% else %}
-                    <span class="badge badge-unknown">N/A</span>
-                    {% endif %}
-                </td>
-                <td class="score">{{ vuln.cvss_score|default:"—" }}</td>
-                <td>{{ vuln.published_date|date:"d M Y" }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <div class="empty-state">
-        <p>No vulnerabilities found. Run <code>python manage.py fetch_cves</code> to fetch data from NVD.</p>
-    </div>
-    {% endif %}
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="brand">
+            <div class="brand-icon">C</div>
+
+            <div>
+                <div class="brand-name">CYVORA</div>
+                <div class="brand-subtitle">AI CYBER INTELLIGENCE</div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'vulnerabilities' %}" class="active">
+                Vulnerabilities
+            </a>
+
+            <a href="{% url 'technology' %}">
+                Technology Stack
+            </a>
+
+            <a href="{% url 'generate_report' %}">
+                Reports
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <div class="page-label">
+                    CYVORA SECURITY INTELLIGENCE
+                </div>
+
+                <h1>
+                    Vulnerability Intelligence
+                </h1>
+
+                <p>
+                    Analyze CVEs, severity, technology relevance,
+                    AI insights and risk priority.
+                </p>
+
+            </div>
+
+            <div class="header-icon">
+                ⚠
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH / FILTER -->
+
+        <section class="filter-card">
+
+            <div class="filter-title">
+                <strong>Search & Filter Vulnerabilities</strong>
+                <span>Use CVE ID or severity</span>
+            </div>
+
+            <form method="GET" class="filter-form">
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input type="text" name="search" placeholder="Search by CVE ID..." value="{{ search }}">
+
+                </div>
+
+
+                <select name="severity">
+
+                    <option value="">All Severities</option>
+
+                    <option value="CRITICAL">Critical</option>
+
+                    <option value="HIGH">High</option>
+
+                    <option value="MEDIUM">Medium</option>
+
+                    <option value="LOW">Low</option>
+
+                </select>
+
+
+                <button type="submit">
+                    Apply Filter
+                </button>
+
+
+                <a href="{% url 'vulnerabilities' %}" class="clear-btn">
+                    Clear
+                </a>
+
+            </form>
+
+        </section>
+
+
+        <!-- INFORMATION BAR -->
+
+        <div class="info-bar">
+
+            <div>
+                <span class="info-dot"></span>
+                NVD vulnerability intelligence
+            </div>
+
+            <div>
+                AI analysis enabled
+            </div>
+
+            <div>
+                CVSS + technology relevance prioritization
+            </div>
+
+        </div>
+
+
+        <!-- VULNERABILITY TABLE -->
+
+        {% if vulnerabilities %}
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <div>
+                    <h2>Vulnerability Records</h2>
+
+                    <p>
+                        CVE intelligence and AI-assisted analysis
+                    </p>
+                </div>
+
+                <div class="record-badge">
+                    LIVE DATA
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>CVE ID</th>
+
+                            <th>Relevance</th>
+
+                            <th>Vulnerability Analysis</th>
+
+                            <th>Severity</th>
+
+                            <th>CVSS</th>
+
+                            <th>Priority</th>
+
+                            <th>Published</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for vuln in vulnerabilities %}
+
+                        <tr>
+
+                            <!-- CVE -->
+
+                            <td class="cve-cell">
+
+                                <strong>
+                                    {{ vuln.cve_id }}
+                                </strong>
+
+                                <span>
+                                    CVE
+                                </span>
+
+                            </td>
+
+
+                            <!-- RELEVANCE -->
+
+                            <td>
+
+                                {% if vuln.is_relevant %}
+
+                                <div class="relevance-badge">
+
+                                    <span>✓</span>
+
+                                    {{ vuln.matched_tech }}
+
+                                </div>
+
+                                {% else %}
+
+                                <span class="no-relevance">
+                                    —
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- DESCRIPTION + AI -->
+
+                            <td class="analysis-cell">
+
+                                <div class="description">
+
+                                    {{ vuln.description|truncatewords:24 }}
+
+                                </div>
+
+
+                                {% if vuln.ai_summary %}
+
+                                <div class="ai-analysis">
+
+                                    <div class="ai-heading">
+
+                                        <span class="ai-mini-icon">
+                                            AI
+                                        </span>
+
+                                        <strong>
+                                            AI Summary
+                                        </strong>
+
+                                    </div>
+
+                                    <p>
+                                        {{ vuln.ai_summary }}
+                                    </p>
+
+                                </div>
+
+
+                                {% if vuln.ai_recommendation %}
+
+                                <div class="recommendation">
+
+                                    <div class="recommendation-heading">
+
+                                        <span>
+                                            ✓
+                                        </span>
+
+                                        <strong>
+                                            AI Recommendation
+                                        </strong>
+
+                                    </div>
+
+                                    <p>
+                                        {{ vuln.ai_recommendation }}
+                                    </p>
+
+                                </div>
+
+                                {% endif %}
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- SEVERITY -->
+
+                            <td>
+
+                                {% if vuln.severity == "CRITICAL" %}
+
+                                <span class="severity critical">
+                                    CRITICAL
+                                </span>
+
+                                {% elif vuln.severity == "HIGH" %}
+
+                                <span class="severity high">
+                                    HIGH
+                                </span>
+
+                                {% elif vuln.severity == "MEDIUM" %}
+
+                                <span class="severity medium">
+                                    MEDIUM
+                                </span>
+
+                                {% elif vuln.severity == "LOW" %}
+
+                                <span class="severity low">
+                                    LOW
+                                </span>
+
+                                {% else %}
+
+                                <span class="severity unknown">
+                                    UNKNOWN
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- CVSS -->
+
+                            <td>
+
+                                <div class="cvss-score">
+
+                                    {% if vuln.cvss_score %}
+                                    {{ vuln.cvss_score }}
+                                    {% else %}
+                                    —
+                                    {% endif %}
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- PRIORITY -->
+
+                            <td>
+
+                                <span class="priority-score">
+
+                                    {{ vuln.priority_score|floatformat:1 }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- DATE -->
+
+                            <td class="date-cell">
+
+                                {{ vuln.published_date|date:"d M Y" }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        {% else %}
+
+
+        <!-- EMPTY -->
+
+        <section class="empty-state">
+
+            <div class="empty-icon">
+                ✓
+            </div>
+
+            <h2>
+                No vulnerabilities found
+            </h2>
+
+            <p>
+                Try changing the CVE search term or severity filter.
+            </p>
+
+            <a href="{% url 'vulnerabilities' %}">
+                Reset Filters
+            </a>
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <div>
+                <strong>CYVORA</strong>
+                <span>AI Cybersecurity Intelligence Platform</span>
+            </div>
+
+            <span>
+                NVD • AI Analysis • CVSS • Risk Prioritization
+            </span>
+
+        </footer>
+
+    </main>
+
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,126 +7,468 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cyvora - Dashboard</title>
+    <title>Cyvora - AI Cybersecurity Intelligence</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-        }
-
-        .navbar {
-            background: #1f6feb;
-            color: white;
-            padding: 18px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar h2 {
-            margin: 0;
-        }
-
-        .logout {
-            color: white;
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 8px 15px;
-            border-radius: 5px;
-        }
-
-        .container {
-            padding: 30px;
-        }
-
-        .welcome {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .card h3 {
-            margin-top: 0;
-        }
-
-        .card p {
-            color: #666;
-        }
-
-        .card a {
-            color: #1f6feb;
-            font-weight: bold;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'accounts/dashboard.css' %}">
 </head>
 
 <body>
 
-    <div class="navbar">
-        <h2>Cyvora</h2>
-        <a href="{% url 'logout' %}" class="logout">Logout</a>
-    </div>
+    <!-- NAVBAR -->
+    <nav class="navbar">
 
-    <div class="container">
+        <div class="brand">
+            <div class="brand-icon">C</div>
 
-        <div class="welcome">
-            <h1>Welcome to Cyvora</h1>
-            <p>
-                AI Cybersecurity Intelligence & Vulnerability
-                Prioritization Platform
-            </p>
+            <div>
+                <div class="brand-name">CYVORA</div>
+                <div class="brand-subtitle">AI CYBER INTELLIGENCE</div>
+            </div>
         </div>
 
-        <div class="cards">
+        <div class="nav-links">
 
-            <div class="card">
-                <h3>Vulnerabilities</h3>
-                <p>
-                    View and manage cybersecurity vulnerabilities.
-                </p>
-                <a href="{% url 'vulnerabilities' %}">
-                    Open Vulnerabilities
-                </a>
-            </div>
+            <a href="{% url 'dashboard' %}" class="active">
+                Dashboard
+            </a>
 
-            <div class="card">
-                <h3>Technology Stack</h3>
-                <p>
-                    Manage your organization's technology stack.
-                </p>
-                <a href="{% url 'technology' %}">
-                    Manage Technology Stack
-                </a>
-            </div>
+            <a href="{% url 'vulnerabilities' %}">
+                Vulnerabilities
+            </a>
 
-            <div class="card">
-                <h3>Reports</h3>
-                <p>
-                    Generate and download vulnerability reports.
-                </p>
-            </div>
+            <a href="{% url 'technology' %}">
+                Technology Stack
+            </a>
+
+            <a href="{% url 'generate_report' %}">
+                Reports
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
 
         </div>
 
-    </div>
+    </nav>
+
+
+    <main class="container">
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-grid"></div>
+
+            <div class="hero-content">
+
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    SECURITY MONITORING ACTIVE
+                </div>
+
+                <h1>
+                    AI-Powered
+                    <span>Cybersecurity Intelligence</span>
+                </h1>
+
+                <p>
+                    Detect vulnerabilities, analyze risk, prioritize threats
+                    and generate actionable security insights.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="{% url 'vulnerabilities' %}" class="primary-btn">
+                        Explore Vulnerabilities →
+                    </a>
+
+                    <a href="{% url 'generate_report' %}" class="secondary-btn">
+                        Generate Report
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="shield-area">
+
+                <div class="shield-glow"></div>
+
+                <div class="shield">
+                    🛡
+                </div>
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY OVERVIEW -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Security Overview</h2>
+                    <p>Current vulnerability intelligence from the NVD dataset</p>
+                </div>
+
+                <div class="live-badge">
+                    ● DATA ACTIVE
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card total-card">
+
+                    <div class="stat-header">
+                        <div class="stat-icon">◈</div>
+                        <span>TOTAL</span>
+                    </div>
+
+                    <div class="stat-number">
+                        {{ total }}
+                    </div>
+
+                    <div class="stat-label">
+                        Total Vulnerabilities
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                </div>
+
+
+                <div class="stat-card critical-card">
+
+                    <div class="stat-header">
+                        <div class="stat-icon">!</div>
+                        <span>CRITICAL</span>
+                    </div>
+
+                    <div class="stat-number">
+                        {{ critical }}
+                    </div>
+
+                    <div class="stat-label">
+                        Critical Severity
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                </div>
+
+
+                <div class="stat-card high-card">
+
+                    <div class="stat-header">
+                        <div class="stat-icon">▲</div>
+                        <span>HIGH</span>
+                    </div>
+
+                    <div class="stat-number">
+                        {{ high }}
+                    </div>
+
+                    <div class="stat-label">
+                        High Severity
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                </div>
+
+
+                <div class="stat-card medium-card">
+
+                    <div class="stat-header">
+                        <div class="stat-icon">●</div>
+                        <span>MEDIUM</span>
+                    </div>
+
+                    <div class="stat-number">
+                        {{ medium }}
+                    </div>
+
+                    <div class="stat-label">
+                        Medium Severity
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                </div>
+
+
+                <div class="stat-card low-card">
+
+                    <div class="stat-header">
+                        <div class="stat-icon">✓</div>
+                        <span>LOW</span>
+                    </div>
+
+                    <div class="stat-number">
+                        {{ low }}
+                    </div>
+
+                    <div class="stat-label">
+                        Low Severity
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AI INTELLIGENCE -->
+
+        <section class="ai-section">
+
+            <div class="ai-background"></div>
+
+            <div class="ai-content">
+
+                <div class="ai-title-row">
+
+                    <div class="ai-icon">
+                        AI
+                    </div>
+
+                    <div>
+                        <div class="ai-label">CYVORA AI ENGINE</div>
+                        <h2>AI Cybersecurity Intelligence</h2>
+                    </div>
+
+                </div>
+
+
+                <p class="ai-description">
+                    Transform technical vulnerability information into
+                    simplified security insights and actionable mitigation
+                    recommendations.
+                </p>
+
+
+                <div class="ai-features">
+
+                    <div class="ai-feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>AI Vulnerability Summaries</strong>
+                            <small>Plain-language vulnerability analysis</small>
+                        </div>
+                    </div>
+
+
+                    <div class="ai-feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>AI Mitigation Recommendations</strong>
+                            <small>Actionable security recommendations</small>
+                        </div>
+                    </div>
+
+
+                    <div class="ai-feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>Technology-Aware Prioritization</strong>
+                            <small>Risk based on CVSS and relevance</small>
+                        </div>
+                    </div>
+
+
+                    <div class="ai-feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>Automated Vulnerability Intelligence</strong>
+                            <small>NVD-based centralized monitoring</small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <a href="{% url 'vulnerabilities' %}" class="ai-btn">
+                    Explore AI Analysis →
+                </a>
+
+            </div>
+
+
+            <div class="ai-visual">
+
+                <div class="ai-circle">
+                    <div class="ai-core">AI</div>
+                </div>
+
+                <div class="ai-ring ring-one"></div>
+                <div class="ai-ring ring-two"></div>
+
+                <span class="node node-one">CVE</span>
+                <span class="node node-two">AI</span>
+                <span class="node node-three">CVSS</span>
+                <span class="node node-four">RISK</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY OPERATIONS -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Security Operations</h2>
+                    <p>Access Cyvora's core security modules</p>
+                </div>
+
+            </div>
+
+
+            <div class="operations-grid">
+
+
+                <div class="operation-card">
+
+                    <div class="operation-icon red">
+                        ⚠
+                    </div>
+
+                    <div>
+                        <h3>Vulnerability Intelligence</h3>
+
+                        <p>
+                            Search and filter CVEs, view severity,
+                            CVSS, relevance, AI summaries and priority scores.
+                        </p>
+
+                        <a href="{% url 'vulnerabilities' %}">
+                            Open Vulnerabilities →
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="operation-card">
+
+                    <div class="operation-icon blue">
+                        ⚙
+                    </div>
+
+                    <div>
+                        <h3>Technology Stack</h3>
+
+                        <p>
+                            Manage operating systems, web technologies,
+                            databases, programming languages and cloud tools.
+                        </p>
+
+                        <a href="{% url 'technology' %}">
+                            Manage Technology Stack →
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="operation-card">
+
+                    <div class="operation-icon green">
+                        ▣
+                    </div>
+
+                    <div>
+                        <h3>Security Reports</h3>
+
+                        <p>
+                            Generate a structured PDF report containing
+                            vulnerability, severity, CVSS and priority data.
+                        </p>
+
+                        <a href="{% url 'generate_report' %}">
+                            Generate PDF Report →
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAPABILITIES -->
+
+        <section class="capabilities">
+
+            <div class="capability">
+                <div class="capability-icon">NVD</div>
+                <div>
+                    <strong>NVD Intelligence</strong>
+                    <span>Centralized CVE data</span>
+                </div>
+            </div>
+
+            <div class="capability">
+                <div class="capability-icon">AI</div>
+                <div>
+                    <strong>AI Analysis</strong>
+                    <span>Summary & recommendations</span>
+                </div>
+            </div>
+
+            <div class="capability">
+                <div class="capability-icon">CVSS</div>
+                <div>
+                    <strong>Risk Prioritization</strong>
+                    <span>Severity & relevance</span>
+                </div>
+            </div>
+
+            <div class="capability">
+                <div class="capability-icon">PDF</div>
+                <div>
+                    <strong>Security Reports</strong>
+                    <span>Downloadable reports</span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <div>
+                <strong>CYVORA</strong>
+                <span>AI Cybersecurity Intelligence Platform</span>
+            </div>
+
+            <span>
+                Vulnerability Intelligence • Risk Prioritization • AI Analysis
+            </span>
+
+        </footer>
+
+    </main>
 
 </body>
 

@@ -27,4 +27,10 @@ urlpatterns = [
         views.technology_view,
         name="technology"
     ),
+
+    path(
+        "reports/pdf/",
+        views.generate_report_view,
+        name="generate_report"
+    ),
 ]

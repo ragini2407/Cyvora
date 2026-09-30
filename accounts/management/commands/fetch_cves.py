@@ -10,28 +10,31 @@ from accounts.models import Vulnerability
 
 
 class Command(BaseCommand):
-
-    help = "Fetch CVEs from NVD API and store them in the database"
+    help = "Fetch a controlled set of genuine CVEs from NVD API"
 
     def handle(self, *args, **options):
 
         url = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 
         # --------------------------------------------------
-        # DATE RANGE
+        # SETTINGS
         # --------------------------------------------------
 
+        TARGET_TOTAL = 100
+
+        # We scan NVD data and keep one genuine record only
+        # when its severity is available.
+        selected_cves = {}
+
+        # Date range used for NVD collection
         start_date = datetime(2023, 1, 1)
         end_date = datetime(2025, 12, 31, 23, 59, 59)
 
         current_start = start_date
 
-        total_created = 0
-        total_updated = 0
-
         self.stdout.write(
             self.style.SUCCESS(
-                "Starting NVD CVE data fetch..."
+                "\nStarting fresh NVD CVE collection..."
             )
         )
 
@@ -39,7 +42,7 @@ class Command(BaseCommand):
         # DATE CHUNKS
         # --------------------------------------------------
 
-        while current_start <= end_date:
+        while current_start <= end_date and len(selected_cves) < TARGET_TOTAL:
 
             current_end = min(
                 current_start + timedelta(days=30),
@@ -55,7 +58,7 @@ class Command(BaseCommand):
             )
 
             self.stdout.write(
-                f"\nFetching: {pub_start} -> {pub_end}"
+                f"\nScanning NVD: {pub_start} -> {pub_end}"
             )
 
             start_index = 0
@@ -64,7 +67,7 @@ class Command(BaseCommand):
             # PAGINATION
             # --------------------------------------------------
 
-            while True:
+            while len(selected_cves) < TARGET_TOTAL:
 
                 params = {
                     "resultsPerPage": 100,
@@ -83,7 +86,6 @@ class Command(BaseCommand):
                 for attempt in range(max_retries):
 
                     try:
-
                         response = requests.get(
                             url,
                             params=params,
@@ -112,7 +114,7 @@ class Command(BaseCommand):
 
                         self.stdout.write(
                             self.style.WARNING(
-                                f"NVD rate limit reached (429). "
+                                f"NVD rate limit reached. "
                                 f"Waiting {wait_time} seconds..."
                             )
                         )
@@ -123,25 +125,18 @@ class Command(BaseCommand):
                     # OTHER ERROR
                     self.stderr.write(
                         self.style.ERROR(
-                            f"NVD API error: "
-                            f"{response.status_code}"
+                            f"NVD API error: {response.status_code}"
                         )
                     )
 
                     self.stderr.write(
-                        f"NVD message: "
-                        f"{response.headers.get('message', 'No message')}"
-                    )
-
-                    self.stderr.write(
-                        f"Response: "
-                        f"{response.text[:500]}"
+                        f"Response: {response.text[:500]}"
                     )
 
                     return
 
                 # --------------------------------------------------
-                # IF STILL NOT SUCCESSFUL
+                # REQUEST FAILED
                 # --------------------------------------------------
 
                 if response is None or response.status_code != 200:
@@ -175,6 +170,9 @@ class Command(BaseCommand):
                 # --------------------------------------------------
 
                 for item in vulnerabilities:
+
+                    if len(selected_cves) >= TARGET_TOTAL:
+                        break
 
                     cve = item.get(
                         "cve",
@@ -291,6 +289,27 @@ class Command(BaseCommand):
                         )
 
                     # --------------------------------------------------
+                    # ONLY KEEP RECORDS WITH REAL SEVERITY
+                    # --------------------------------------------------
+
+                    if not severity:
+                        continue
+
+                    severity = severity.upper()
+
+                    if severity not in {
+                        "CRITICAL",
+                        "HIGH",
+                        "MEDIUM",
+                        "LOW"
+                    }:
+                        continue
+
+                    # Avoid duplicate CVE IDs
+                    if cve_id in selected_cves:
+                        continue
+
+                    # --------------------------------------------------
                     # PUBLISHED DATE
                     # --------------------------------------------------
 
@@ -311,7 +330,6 @@ class Command(BaseCommand):
                                 )
                             )
 
-                            # Make sure datetime is timezone-aware
                             if timezone.is_naive(
                                 published_date
                             ):
@@ -325,28 +343,15 @@ class Command(BaseCommand):
                             published_date = None
 
                     # --------------------------------------------------
-                    # SAVE / UPDATE
+                    # STORE TEMPORARILY
                     # --------------------------------------------------
 
-                    obj, created = (
-                        Vulnerability.objects.update_or_create(
-                            cve_id=cve_id,
-                            defaults={
-                                "description": description,
-                                "cvss_score": cvss_score,
-                                "severity": severity,
-                                "published_date": published_date,
-                            }
-                        )
-                    )
-
-                    if created:
-
-                        total_created += 1
-
-                    else:
-
-                        total_updated += 1
+                    selected_cves[cve_id] = {
+                        "description": description,
+                        "cvss_score": cvss_score,
+                        "severity": severity,
+                        "published_date": published_date,
+                    }
 
                 # --------------------------------------------------
                 # PAGINATION
@@ -360,8 +365,7 @@ class Command(BaseCommand):
                 ):
                     break
 
-                # Small pause between pages
-                time.sleep(6)
+                time.sleep(2)
 
             # --------------------------------------------------
             # NEXT DATE CHUNK
@@ -371,17 +375,100 @@ class Command(BaseCommand):
                 seconds=1
             )
 
-            # Important: pause between date chunks
-            time.sleep(10)
+            time.sleep(3)
 
         # --------------------------------------------------
-        # FINAL RESULT
+        # CHECK RESULT
         # --------------------------------------------------
+
+        if len(selected_cves) < TARGET_TOTAL:
+
+            self.stderr.write(
+                self.style.ERROR(
+                    f"\nOnly {len(selected_cves)} CVEs were collected."
+                )
+            )
+
+            self.stderr.write(
+                self.style.ERROR(
+                    "Try running the command again."
+                )
+            )
+
+            return
+
+        # --------------------------------------------------
+        # REMOVE OLD DATA
+        # --------------------------------------------------
+
+        old_count = Vulnerability.objects.count()
+
+        Vulnerability.objects.all().delete()
 
         self.stdout.write(
-            self.style.SUCCESS(
-                f"\nDone! "
-                f"{total_created} new CVEs added, "
-                f"{total_updated} CVEs updated."
+            self.style.WARNING(
+                f"\nRemoved {old_count} old vulnerability records."
             )
         )
+
+        # --------------------------------------------------
+        # SAVE FRESH 100 CVEs
+        # --------------------------------------------------
+
+        created = 0
+
+        for cve_id, record in selected_cves.items():
+
+            Vulnerability.objects.create(
+                cve_id=cve_id,
+                description=record["description"],
+                cvss_score=record["cvss_score"],
+                severity=record["severity"],
+                published_date=record["published_date"],
+            )
+
+            created += 1
+
+        # --------------------------------------------------
+        # SHOW SEVERITY DISTRIBUTION
+        # --------------------------------------------------
+
+        severity_counts = {}
+
+        for record in selected_cves.values():
+
+            level = record["severity"]
+
+            severity_counts[level] = (
+                severity_counts.get(level, 0) + 1
+            )
+
+        self.stdout.write("\n--------------------------------")
+        self.stdout.write(
+            self.style.SUCCESS(
+                "Fresh NVD dataset created successfully!"
+            )
+        )
+        self.stdout.write("--------------------------------")
+
+        self.stdout.write(
+            f"Total CVEs: {created}"
+        )
+
+        self.stdout.write(
+            f"CRITICAL: {severity_counts.get('CRITICAL', 0)}"
+        )
+
+        self.stdout.write(
+            f"HIGH: {severity_counts.get('HIGH', 0)}"
+        )
+
+        self.stdout.write(
+            f"MEDIUM: {severity_counts.get('MEDIUM', 0)}"
+        )
+
+        self.stdout.write(
+            f"LOW: {severity_counts.get('LOW', 0)}"
+        )
+
+        self.stdout.write("--------------------------------")
