@@ -14,10 +14,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+"""
+URL configuration for cyvora project.
+"""
+
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),
+    # Django Admin
+    path("admin/", admin.site.urls),
+
+    # Google / Social Authentication
+    path("accounts/", include("allauth.urls")),
+
+    # Cyvora application
+    path("", include("accounts.urls")),
 ]

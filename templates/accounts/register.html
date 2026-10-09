@@ -5,183 +5,750 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cyvora - Register</title>
+    <title>Cyvora - Create Account</title>
 
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            width: 400px;
-            margin: 80px auto;
-            background: white;
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f3f6fa;
+            color: #172033;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             padding: 30px;
+        }
+
+        /* =====================================================
+           MAIN WRAPPER
+           ===================================================== */
+
+        .register-wrapper {
+            width: 100%;
+            max-width: 980px;
+            min-height: 620px;
+
+            display: grid;
+            grid-template-columns: 46% 54%;
+
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 18px 45px rgba(15, 35, 65, 0.13);
+        }
+
+        /* =====================================================
+           LEFT BRANDING PANEL
+           ===================================================== */
+
+        .brand-panel {
+            position: relative;
+
+            padding: 48px 42px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(145deg,
+                    #07182d 0%,
+                    #0d2b50 55%,
+                    #1655a0 100%);
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand-grid {
+            position: absolute;
+            inset: 0;
+
+            opacity: .11;
+
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .18) 1px,
+                    transparent 1px),
+                linear-gradient(90deg,
+                    rgba(255, 255, 255, .18) 1px,
+                    transparent 1px);
+
+            background-size: 30px 30px;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo {
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, .3);
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
+        .brand-name {
+            font-size: 28px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
         }
 
-        .subtitle {
-            text-align: center;
-            color: #666;
+        .brand-title {
+            margin-top: 5px;
+
+            color: #78b7ff;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 1.2px;
+        }
+
+        .brand-description {
+            max-width: 340px;
+
+            margin-top: 28px;
+
+            color: #cbd9e9;
+
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           FEATURES
+           ===================================================== */
+
+        .features {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 11px;
+
+            margin-bottom: 18px;
+        }
+
+        .feature-icon {
+            width: 31px;
+            height: 31px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            background: rgba(255, 255, 255, .09);
+
+            color: #74b4ff;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .feature strong {
+            display: block;
+
+            color: #f3f7fc;
+
+            font-size: 11px;
+        }
+
+        .feature span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: #91a6be;
+
+            font-size: 10px;
+            line-height: 1.45;
+        }
+
+        .brand-footer {
+            position: relative;
+            z-index: 2;
+
+            color: #718aa5;
+
+            font-size: 9px;
+
+            letter-spacing: .5px;
+        }
+
+        /* =====================================================
+           RIGHT REGISTER PANEL
+           ===================================================== */
+
+        .form-panel {
+            padding: 48px 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background: white;
+        }
+
+        .form-header {
             margin-bottom: 25px;
+        }
+
+        .form-label {
+            margin-bottom: 7px;
+
+            color: #2563eb;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-header h1 {
+            color: #172033;
+
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        .form-header p {
+            margin-top: 7px;
+
+            color: #718096;
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           MESSAGES
+           ===================================================== */
+
+        .messages {
+            margin-bottom: 18px;
+        }
+
+        .message {
+            padding: 10px 12px;
+
+            border-radius: 7px;
+
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .error {
+            border: 1px solid #fecaca;
+
+            background: #fff1f2;
+
+            color: #b91c1c;
+        }
+
+        .success {
+            border: 1px solid #bbf7d0;
+
+            background: #f0fdf4;
+
+            color: #15803d;
+        }
+
+        /* =====================================================
+           FORM
+           ===================================================== */
+
+        form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-weight: bold;
+
+            margin-bottom: 6px;
+
+            color: #34445a;
+
+            font-size: 11px;
+            font-weight: 700;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            height: 43px;
+
+            padding: 0 12px;
+
+            border: 1px solid #d5dfeb;
+            border-radius: 7px;
+
+            outline: none;
+
+            background: #fbfcfe;
+
+            color: #172033;
+
+            font-family: inherit;
+            font-size: 12px;
+
+            transition: .2s ease;
         }
 
-        button {
+        input::placeholder {
+            color: #9aa8ba;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .08);
+        }
+
+        /* =====================================================
+           CREATE ACCOUNT BUTTON
+           ===================================================== */
+
+        .register-btn {
             width: 100%;
-            margin-top: 25px;
-            padding: 11px;
+            height: 44px;
+
+            margin-top: 5px;
+
             border: none;
-            border-radius: 5px;
-            background: #1f6feb;
+            border-radius: 7px;
+
+            background: #2563eb;
+
             color: white;
-            font-size: 16px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+            font-weight: 700;
+
             cursor: pointer;
+
+            box-shadow:
+                0 5px 13px rgba(37, 99, 235, .20);
+
+            transition: .2s ease;
         }
 
-        button:hover {
-            background: #1558b0;
+        .register-btn:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
         }
+
+        /* =====================================================
+           LOGIN LINK
+           ===================================================== */
 
         .login-link {
-            text-align: center;
             margin-top: 20px;
-        }
 
-        .messages {
-            margin-bottom: 15px;
-        }
-
-        .error {
-            color: #d93025;
             text-align: center;
-            margin-bottom: 10px;
+
+            color: #718096;
+
+            font-size: 11px;
         }
 
-        .success {
-            color: #188038;
-            text-align: center;
-            margin-bottom: 10px;
+        .login-link a {
+            margin-left: 4px;
+
+            color: #2563eb;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           SECURITY NOTE
+           ===================================================== */
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 20px;
+            padding-top: 16px;
+
+            border-top: 1px solid #edf1f5;
+
+            color: #8a98aa;
+
+            font-size: 9px;
+        }
+
+        .security-icon {
+            color: #16a34a;
+
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 18px;
+            }
+
+            .register-wrapper {
+                max-width: 520px;
+
+                grid-template-columns: 1fr;
+            }
+
+            .brand-panel {
+                min-height: 300px;
+
+                padding: 32px;
+            }
+
+            .brand-description {
+                margin-top: 18px;
+            }
+
+            .features {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+
+                margin-top: 22px;
+            }
+
+            .feature {
+                margin-bottom: 0;
+            }
+
+            .brand-footer {
+                margin-top: 20px;
+            }
+
+            .form-panel {
+                padding: 38px 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .register-wrapper {
+                border-radius: 12px;
+            }
+
+            .brand-panel {
+                padding: 28px 24px;
+            }
+
+            .brand-name {
+                font-size: 24px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-panel {
+                padding: 32px 24px;
+            }
+
+            .form-header h1 {
+                font-size: 25px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="register-wrapper">
 
-        <h1>Cyvora</h1>
+        <!-- =================================================
+             LEFT BRANDING
+             ================================================= -->
 
-        <p class="subtitle">
-            Create your account
-        </p>
+        <div class="brand-panel">
+
+            <div class="brand-grid"></div>
+
+            <div class="brand-content">
+
+                <div class="brand-logo">
+                    C
+                </div>
+
+                <div class="brand-name">
+                    CYVORA
+                </div>
+
+                <div class="brand-title">
+                    AI-POWERED CYBERSECURITY INTELLIGENCE
+                </div>
+
+                <p class="brand-description">
+                    Create your Cyvora account and access a centralized
+                    platform for vulnerability intelligence, AI analysis,
+                    risk prioritization and security reporting.
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            CVE
+                        </div>
+
+                        <div>
+                            <strong>Vulnerability Intelligence</strong>
+                            <span>
+                                Monitor and analyze CVE vulnerability data.
+                            </span>
+                        </div>
+
+                    </div>
 
 
-        <!-- Django Messages -->
-        {% if messages %}
+                    <div class="feature">
 
-        <div class="messages">
+                        <div class="feature-icon">
+                            AI
+                        </div>
 
-            {% for message in messages %}
+                        <div>
+                            <strong>AI Security Analysis</strong>
+                            <span>
+                                Get simplified vulnerability summaries
+                                and mitigation guidance.
+                            </span>
+                        </div>
 
-            {% if message.tags == "error" %}
+                    </div>
 
-            <p class="error">
-                {{ message }}
-            </p>
 
-            {% else %}
+                    <div class="feature">
 
-            <p class="success">
-                {{ message }}
-            </p>
+                        <div class="feature-icon">
+                            RISK
+                        </div>
 
-            {% endif %}
+                        <div>
+                            <strong>Risk Prioritization</strong>
+                            <span>
+                                Identify vulnerabilities that need
+                                attention first.
+                            </span>
+                        </div>
 
-            {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="brand-footer">
+                CYVORA • AI CYBERSECURITY INTELLIGENCE PLATFORM
+            </div>
 
         </div>
 
-        {% endif %}
+
+        <!-- =================================================
+             RIGHT FORM
+             ================================================= -->
+
+        <div class="form-panel">
+
+            <div class="form-header">
+
+                <div class="form-label">
+                    Account Registration
+                </div>
+
+                <h1>
+                    Create your account
+                </h1>
+
+                <p>
+                    Set up your account to start using Cyvora.
+                </p>
+
+            </div>
 
 
-        <!-- Registration Form -->
-        <form method="POST">
+            <!-- Django Messages -->
 
-            {% csrf_token %}
+            {% if messages %}
 
+            <div class="messages">
 
-            <!-- Username -->
-            <label for="username">
-                Username
-            </label>
+                {% for message in messages %}
 
-            <input type="text" id="username" name="username" placeholder="Enter username" required>
+                {% if message.tags == "error" %}
 
+                <div class="message error">
+                    {{ message }}
+                </div>
 
-            <!-- Email -->
-            <label for="email">
-                Email
-            </label>
+                {% else %}
 
-            <input type="email" id="email" name="email" placeholder="Enter email" required>
+                <div class="message success">
+                    {{ message }}
+                </div>
 
+                {% endif %}
 
-            <!-- Password -->
-            <label for="password">
-                Password
-            </label>
+                {% endfor %}
 
-            <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
 
-
-            <!-- Confirm Password -->
-            <label for="confirm_password">
-                Confirm Password
-            </label>
-
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password"
-                required>
+            {% endif %}
 
 
-            <!-- Create Account Button -->
-            <button type="submit">
-                Create Account
-            </button>
+            <!-- Registration Form -->
 
-        </form>
+            <form method="POST">
+
+                {% csrf_token %}
 
 
-        <!-- Login Link -->
-        <div class="login-link">
+                <div class="form-group">
 
-            Already have an account?
+                    <label for="username">
+                        Username
+                    </label>
 
-            <a href="{% url 'login' %}">
-                Login
-            </a>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Enter email address" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        placeholder="Confirm your password" required>
+
+                </div>
+
+
+                <button type="submit" class="register-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+            </div>
+
+
+            <div class="security-note">
+
+                <span class="security-icon">
+                    ●
+                </span>
+
+                Your account information is protected by Cyvora.
+
+            </div>
 
         </div>
 

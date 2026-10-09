@@ -1,10 +1,13 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cyvora - Technology Stack</title>
 
     <style>
@@ -17,68 +20,70 @@
             font-family: Arial, Helvetica, sans-serif;
             background: #f4f7fb;
             color: #172033;
+            font-size: 14px;
         }
 
         /* ================= NAVBAR ================= */
 
         .navbar {
-            height: 68px;
-            background: #0b1426;
+            min-height: 72px;
+            background: #091426;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 38px;
             color: white;
+            box-shadow: 0 3px 14px rgba(0, 0, 0, .16);
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .brand-icon {
-            width: 39px;
-            height: 39px;
+            width: 42px;
+            height: 42px;
             background: #2563eb;
-            border-radius: 9px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 700;
         }
 
         .brand-name {
-            font-size: 17px;
-            font-weight: bold;
+            font-size: 18px;
+            font-weight: 700;
             letter-spacing: 1px;
         }
 
         .brand-subtitle {
-            font-size: 7px;
-            color: #94a3b8;
-            margin-top: 2px;
-            letter-spacing: .5px;
+            margin-top: 3px;
+            color: #a8b7cf;
+            font-size: 11px;
+            letter-spacing: .7px;
         }
 
         .nav-links {
             display: flex;
-            gap: 5px;
             align-items: center;
+            gap: 6px;
         }
 
         .nav-links a {
-            color: #cbd5e1;
+            color: #d5deed;
             text-decoration: none;
-            padding: 9px 12px;
-            border-radius: 7px;
-            font-size: 11px;
+            padding: 11px 15px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
         }
 
         .nav-links a:hover {
-            background: #18253d;
+            background: #17263f;
             color: white;
         }
 
@@ -87,363 +92,304 @@
             color: white;
         }
 
-        .logout {
-            border: 1px solid #334155;
+        .logout-btn {
             margin-left: 5px;
         }
 
-
-        /* ================= PAGE ================= */
+        /* ================= CONTAINER ================= */
 
         .container {
-            max-width: 1320px;
+            width: 100%;
+            max-width: 1380px;
             margin: auto;
-            padding: 28px 30px;
+            padding: 32px 36px 25px;
         }
-
 
         /* ================= HERO ================= */
 
-        .hero {
-            min-height: 150px;
-            padding: 27px 30px;
-            border-radius: 17px;
-            background: linear-gradient(120deg, #071326, #123d7a, #1b5dbb);
-            color: white;
+        .page-header {
+            min-height: 190px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 12px 30px rgba(15, 60, 130, .17);
+
+            padding: 35px 38px;
+            margin-bottom: 18px;
+
+            border-radius: 18px;
+
+            background: linear-gradient(120deg,
+                    #091426 0%,
+                    #12376b 55%,
+                    #1d5fc3 100%);
+
+            color: white;
+
+            box-shadow: 0 10px 28px rgba(15, 50, 100, .18);
         }
 
-        .hero-label {
-            color: #80b8ff;
-            font-size: 8px;
-            font-weight: bold;
+        .page-label {
+            color: #8fc0ff;
+            font-size: 12px;
+            font-weight: 700;
             letter-spacing: 1.5px;
-            margin-bottom: 7px;
+            margin-bottom: 9px;
         }
 
-        .hero h1 {
-            margin: 0 0 7px;
-            font-size: 28px;
+        .page-header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+            line-height: 1.2;
         }
 
-        .hero p {
+        .page-header p {
             margin: 0;
-            max-width: 680px;
-            color: #d4deec;
-            font-size: 11px;
-            line-height: 1.5;
+            max-width: 760px;
+            color: #e1ebfa;
+            font-size: 14px;
+            line-height: 1.65;
         }
 
-        .hero-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .header-icon {
+            width: 68px;
+            height: 68px;
+            flex-shrink: 0;
 
-        .add-main {
-            border: 0;
-            padding: 11px 16px;
-            border-radius: 8px;
-            background: white;
-            color: #1859b8;
-            font-size: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .add-main:hover {
-            background: #eaf2ff;
-        }
-
-        .hero-icon {
-            width: 58px;
-            height: 58px;
-            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, .09);
-            border: 1px solid rgba(255, 255, 255, .18);
-            font-size: 25px;
+
+            border-radius: 16px;
+
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .22);
+
+            font-size: 30px;
         }
 
-
-        /* ================= INFO ================= */
+        /* ================= INFO BAR ================= */
 
         .info-bar {
-            margin: 13px 0 22px;
-            padding: 10px 14px;
-            border: 1px solid #d9e7fb;
-            border-radius: 9px;
-            background: #eef5ff;
-            color: #5b6b82;
+            min-height: 48px;
+
             display: flex;
-            gap: 24px;
-            font-size: 8px;
+            align-items: center;
+            gap: 28px;
+
+            padding: 0 18px;
+            margin-bottom: 24px;
+
+            border: 1px solid #d6e3f5;
+            border-radius: 10px;
+
+            background: #edf5ff;
+
+            color: #50627a;
+            font-size: 12px;
         }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: #22c55e;
-            border-radius: 50%;
+        .info-dot {
             display: inline-block;
-            margin-right: 5px;
+            width: 8px;
+            height: 8px;
+            margin-right: 7px;
+            border-radius: 50%;
+            background: #22c55e;
         }
 
-
-        /* ================= MESSAGES ================= */
+        /* ================= MESSAGE ================= */
 
         .message {
-            padding: 10px 14px;
-            margin-bottom: 15px;
-            border-radius: 8px;
+            padding: 13px 17px;
+            margin-bottom: 18px;
+
+            border-radius: 9px;
+
             background: #ecfdf5;
             border: 1px solid #bbf7d0;
+
             color: #15803d;
-            font-size: 9px;
-            font-weight: bold;
-        }
 
-
-        /* ================= OVERVIEW ================= */
-
-        .section-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 11px;
-        }
-
-        .section-heading h2 {
-            margin: 0;
-            font-size: 15px;
-        }
-
-        .section-heading span {
-            color: #94a3b8;
-            font-size: 9px;
-        }
-
-        .overview-grid {
-            display: grid;
-            grid-template-columns: 1.3fr repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 13px;
-        }
-
-        .overview-grid.second {
-            grid-template-columns: repeat(3, 1fr);
-            margin-bottom: 28px;
-        }
-
-        .overview-card {
-            background: white;
-            border: 1px solid #e0e7f0;
-            border-radius: 12px;
-            padding: 16px 17px;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, .035);
-        }
-
-        .overview-card.total {
-            background: linear-gradient(120deg, #eff6ff, #ffffff);
-            border-color: #cfe0fb;
-        }
-
-        .overview-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .overview-label {
-            color: #64748b;
-            font-size: 8px;
-            font-weight: bold;
-            letter-spacing: .4px;
-        }
-
-        .overview-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 7px;
-            background: #edf4ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 13px;
+            font-weight: 600;
         }
 
-        .overview-number {
-            margin-top: 7px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #1455b8;
-        }
-
-        .overview-card.total .overview-number {
-            font-size: 26px;
-        }
-
-        .overview-small {
-            margin-top: 3px;
-            color: #94a3b8;
-            font-size: 8px;
-        }
-
-
-        /* ================= TECHNOLOGY SECTION ================= */
-
-        .environment-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0 0 13px;
-        }
-
-        .environment-heading h2 {
-            margin: 0;
-            font-size: 16px;
-        }
-
-        .environment-heading span {
-            color: #94a3b8;
-            font-size: 9px;
-        }
+        /* ================= GRID ================= */
 
         .technology-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            align-items: start;
         }
+
+        /* ================= CARD ================= */
 
         .technology-card {
-            background: white;
-            border: 1px solid #e0e7f0;
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 5px 18px rgba(15, 23, 42, .045);
+            background: #ffffff;
+
+            border: 1px solid #dce5f0;
+            border-radius: 15px;
+
+            padding: 23px;
+
+            box-shadow: 0 5px 18px rgba(15, 23, 42, .055);
         }
 
-        .card-header {
+        .card-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 14px;
-            border-bottom: 1px solid #edf1f6;
+
+            margin-bottom: 14px;
         }
 
         .card-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .category-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 9px;
-            background: #edf4ff;
+            width: 43px;
+            height: 43px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
+
+            border-radius: 11px;
+
+            background: #eaf2ff;
+            color: #2563eb;
+
+            font-size: 19px;
         }
 
-        .card-title h3 {
+        .technology-card h3 {
             margin: 0;
-            font-size: 14px;
+            color: #172033;
+            font-size: 18px;
+            line-height: 1.25;
         }
 
-        .card-title p {
-            margin: 4px 0 0;
-            color: #94a3b8;
-            font-size: 8px;
+        .category-count {
+            margin-top: 4px;
+            color: #7b8aa0;
+            font-size: 12px;
         }
 
-        .card-add {
+        .technology-card>p {
+            margin: 0 0 17px;
+
+            color: #596b83;
+
+            font-size: 13px;
+            line-height: 1.55;
+
+            min-height: 20px;
+        }
+
+        /* ================= ADD BUTTON ================= */
+
+        .add-btn {
             border: 0;
-            padding: 7px 10px;
-            border-radius: 6px;
+            border-radius: 7px;
+
+            padding: 9px 13px;
+
             background: #2563eb;
             color: white;
-            font-size: 8px;
-            font-weight: bold;
+
             cursor: pointer;
+
+            font-size: 12px;
+            font-weight: 700;
         }
 
-        .card-add:hover {
+        .add-btn:hover {
             background: #1d4ed8;
         }
 
-
-        /* ================= TECHNOLOGY ROW ================= */
+        /* ================= TECHNOLOGY LIST ================= */
 
         .tech-list {
-            margin-top: 7px;
+            border-top: 1px solid #e7edf5;
         }
 
-        .tech-row {
-            min-height: 51px;
-            padding: 9px 0;
-            border-bottom: 1px solid #edf1f6;
+        .tech-item {
+            min-height: 60px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
+
+            gap: 16px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #e7edf5;
         }
 
-        .tech-row:last-child {
+        .tech-item:last-child {
             border-bottom: 0;
         }
 
-        .tech-info {
-            min-width: 0;
-        }
-
         .tech-name {
-            font-size: 10px;
-            font-weight: bold;
-            color: #26364d;
+            color: #1d2b42;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
         }
 
         .tech-description {
             margin-top: 4px;
-            color: #94a3b8;
-            font-size: 8px;
-            line-height: 1.35;
-            max-width: 430px;
+
+            max-width: 520px;
+
+            color: #687991;
+
+            font-size: 12px;
+            line-height: 1.5;
         }
 
         .tech-right {
             display: flex;
             align-items: center;
             gap: 7px;
+
             flex-shrink: 0;
         }
 
         .version {
-            padding: 5px 7px;
+            padding: 5px 9px;
+
+            border-radius: 9px;
+
             background: #f1f5f9;
-            color: #64748b;
-            border-radius: 8px;
-            font-size: 7px;
-            white-space: nowrap;
+            color: #607089;
+
+            font-size: 11px;
+            font-weight: 600;
         }
 
+        /* ================= ICON BUTTONS ================= */
+
         .icon-btn {
-            width: 27px;
-            height: 27px;
+            width: 34px;
+            height: 34px;
+
             border: 0;
-            border-radius: 6px;
-            display: flex;
+            border-radius: 8px;
+
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+
             cursor: pointer;
-            font-size: 11px;
+
+            font-size: 14px;
+            font-weight: 700;
         }
 
         .edit-btn {
@@ -461,160 +407,234 @@
         }
 
         .delete-btn:hover {
-            background: #fee2e2;
+            background: #ffe4e6;
         }
 
-        .empty {
-            padding: 20px 0 8px;
-            color: #a0aab8;
-            font-size: 9px;
+        /* ================= EMPTY ================= */
+
+        .empty-tech {
+            padding: 22px 0;
+
             text-align: center;
-        }
 
+            color: #94a3b8;
+
+            font-size: 13px;
+            font-style: italic;
+        }
 
         /* ================= MODALS ================= */
 
         .modal-overlay {
             display: none;
+
             position: fixed;
             inset: 0;
+
             z-index: 1000;
-            background: rgba(5, 15, 30, .68);
+
             align-items: center;
             justify-content: center;
+
             padding: 20px;
+
+            background: rgba(5, 15, 30, .68);
         }
 
         .modal-overlay.active {
             display: flex;
         }
 
-        .modal {
-            width: 400px;
+        .modal-box {
+            width: 450px;
             max-width: 100%;
+
+            padding: 28px;
+
             background: white;
-            border-radius: 14px;
-            padding: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .28);
+
+            border-radius: 15px;
+
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .28);
         }
 
-        .modal h3 {
-            margin: 0 0 4px;
-            font-size: 17px;
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            margin-bottom: 20px;
         }
 
-        .modal-subtitle {
-            color: #64748b;
-            font-size: 9px;
-            margin-bottom: 17px;
+        .modal-header h3 {
+            margin: 0;
+            color: #172033;
+            font-size: 20px;
         }
 
-        .modal label {
+        .modal-header span {
             display: block;
-            margin: 11px 0 5px;
+            margin-top: 5px;
+            color: #718096;
+            font-size: 12px;
+        }
+
+        .modal-close {
+            border: 0;
+            background: transparent;
+            color: #64748b;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .modal-box label {
+            display: block;
+
+            margin: 13px 0 6px;
+
             color: #334155;
-            font-size: 9px;
-            font-weight: bold;
+
+            font-size: 12px;
+            font-weight: 700;
         }
 
-        .modal input,
-        .modal textarea,
-        .modal select {
+        .modal-box input,
+        .modal-box textarea,
+        .modal-box select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #dbe3ed;
-            border-radius: 7px;
-            background: #f8fafc;
+
+            padding: 11px 12px;
+
+            border: 1px solid #d7e0eb;
+            border-radius: 8px;
+
             outline: none;
-            font-family: Arial, sans-serif;
-            font-size: 9px;
+
+            background: #f8fafc;
+
+            color: #172033;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
         }
 
-        .modal input:focus,
-        .modal textarea:focus,
-        .modal select:focus {
+        .modal-box textarea {
+            resize: vertical;
+        }
+
+        .modal-box input:focus,
+        .modal-box textarea:focus,
+        .modal-box select:focus {
             border-color: #2563eb;
             background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .09);
         }
 
         .modal-actions {
             display: flex;
-            gap: 8px;
-            margin-top: 18px;
+            gap: 10px;
+            margin-top: 22px;
         }
 
         .modal-actions button {
             flex: 1;
-            padding: 10px;
+
+            padding: 11px;
+
             border: 0;
-            border-radius: 7px;
+            border-radius: 8px;
+
             cursor: pointer;
-            font-size: 9px;
-            font-weight: bold;
+
+            font-size: 12px;
+            font-weight: 700;
         }
 
-        .cancel {
-            background: #eef2f7;
-            color: #475569;
-        }
-
-        .save {
+        .btn-save {
             background: #2563eb;
             color: white;
         }
 
-        .save:hover {
+        .btn-save:hover {
             background: #1d4ed8;
         }
 
-        .delete-modal {
-            width: 360px;
+        .btn-cancel {
+            background: #edf1f6;
+            color: #475569;
+        }
+
+        .btn-cancel:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-delete {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+        }
+
+        /* ================= DELETE ================= */
+
+        .delete-box {
+            width: 400px;
             text-align: center;
         }
 
         .warning-icon {
-            width: 45px;
-            height: 45px;
-            margin: 0 auto 12px;
-            border-radius: 50%;
-            background: #fff1f2;
-            color: #dc2626;
+            width: 52px;
+            height: 52px;
+
+            margin: 0 auto 15px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff1f2;
+            color: #dc2626;
+
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .delete-box h3 {
+            margin: 0 0 9px;
             font-size: 20px;
-            font-weight: bold;
         }
 
-        .delete-modal p {
+        .delete-box p {
+            margin: 0;
             color: #64748b;
-            font-size: 10px;
-            line-height: 1.5;
+            font-size: 13px;
+            line-height: 1.6;
         }
-
-        .confirm-delete {
-            background: #dc2626 !important;
-            color: white;
-        }
-
 
         /* ================= FOOTER ================= */
 
         footer {
-            margin-top: 28px;
-            padding: 18px 0;
-            border-top: 1px solid #dbe3ed;
             display: flex;
             justify-content: space-between;
-            color: #94a3b8;
-            font-size: 8px;
+
+            margin-top: 30px;
+            padding: 19px 4px;
+
+            border-top: 1px solid #d9e2ed;
+
+            color: #7b8aa0;
+
+            font-size: 12px;
         }
 
         footer strong {
             color: #2563eb;
             letter-spacing: 1px;
         }
-
 
         /* ================= RESPONSIVE ================= */
 
@@ -624,42 +644,39 @@
                 grid-template-columns: 1fr;
             }
 
-            .overview-grid,
-            .overview-grid.second {
-                grid-template-columns: repeat(2, 1fr);
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 25px 20px;
             }
         }
 
         @media (max-width: 650px) {
 
-            .navbar {
-                padding: 0 15px;
+            .nav-links a {
+                padding: 8px;
+                font-size: 11px;
             }
 
-            .nav-links a:not(.active):not(.logout) {
+            .page-header {
+                padding: 28px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .header-icon {
                 display: none;
-            }
-
-            .container {
-                padding: 18px;
-            }
-
-            .hero {
-                padding: 23px;
-            }
-
-            .hero-right {
-                display: none;
-            }
-
-            .overview-grid,
-            .overview-grid.second {
-                grid-template-columns: 1fr 1fr;
             }
 
             .info-bar {
+                height: auto;
+                padding: 12px;
                 flex-wrap: wrap;
-                gap: 8px;
+                gap: 10px;
             }
 
             footer {
@@ -668,26 +685,35 @@
             }
         }
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-    <nav class="navbar">
+    <div class="navbar">
 
         <div class="brand">
 
-            <div class="brand-icon">C</div>
+            <div class="brand-icon">
+                C
+            </div>
 
-            <div>
-                <div class="brand-name">CYVORA</div>
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    CYVORA
+                </div>
 
                 <div class="brand-subtitle">
                     CYBERSECURITY INTELLIGENCE
                 </div>
+
             </div>
 
         </div>
@@ -711,25 +737,32 @@
                 Reports
             </a>
 
-            <a href="{% url 'logout' %}" class="logout">
+            <a href="{% url 'logout' %}" class="logout-btn">
                 Logout
             </a>
 
         </div>
 
-    </nav>
+    </div>
 
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
 
     <div class="container">
 
 
-        <!-- ================= HERO ================= -->
+        <!-- =================================================
+             HERO
+        ================================================= -->
 
-        <section class="hero">
+        <div class="page-header">
 
             <div>
 
-                <div class="hero-label">
+                <div class="page-label">
                     ORGANIZATION SECURITY PROFILE
                 </div>
 
@@ -745,28 +778,22 @@
 
             </div>
 
-
-            <div class="hero-right">
-
-                <button class="add-main" onclick="openAddModal('os')">
-                    + Add Technology
-                </button>
-
-                <div class="hero-icon">
-                    🛡️
-                </div>
-
+            <div class="header-icon">
+                🛡️
             </div>
 
-        </section>
+        </div>
 
 
-        <!-- ================= INFO ================= -->
+
+        <!-- =================================================
+             INFO
+        ================================================= -->
 
         <div class="info-bar">
 
             <span>
-                <span class="status-dot"></span>
+                <span class="info-dot"></span>
                 Technology profile active
             </span>
 
@@ -781,7 +808,10 @@
         </div>
 
 
-        <!-- ================= MESSAGES ================= -->
+
+        <!-- =================================================
+             MESSAGES
+        ================================================= -->
 
         {% if messages %}
 
@@ -796,240 +826,26 @@
         {% endif %}
 
 
-        <!-- ================= STACK OVERVIEW ================= -->
 
-        <div class="section-heading">
-
-            <h2>
-                Stack Overview
-            </h2>
-
-            <span>
-                {{ total_technologies }} technologies configured
-            </span>
-
-        </div>
-
-
-        <!-- TOTAL + OS + WEB + DATABASE -->
-
-        <div class="overview-grid">
-
-
-            <div class="overview-card total">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        TOTAL TECHNOLOGIES
-                    </div>
-
-                    <div class="overview-icon">
-                        ◈
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ total_technologies }}
-                </div>
-
-                <div class="overview-small">
-                    Complete technology profile
-                </div>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        OPERATING SYSTEMS
-                    </div>
-
-                    <div class="overview-icon">
-                        🖥
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ os_count }}
-                </div>
-
-                <div class="overview-small">
-                    Server & desktop systems
-                </div>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        WEB TECHNOLOGIES
-                    </div>
-
-                    <div class="overview-icon">
-                        🌐
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ web_count }}
-                </div>
-
-                <div class="overview-small">
-                    Servers & frameworks
-                </div>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        DATABASES
-                    </div>
-
-                    <div class="overview-icon">
-                        🗄
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ database_count }}
-                </div>
-
-                <div class="overview-small">
-                    Data storage systems
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- LANGUAGE + CLOUD + SECURITY -->
-
-        <div class="overview-grid second">
-
-
-            <div class="overview-card">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        PROGRAMMING LANGUAGES
-                    </div>
-
-                    <div class="overview-icon">
-                        💻
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ language_count }}
-                </div>
-
-                <div class="overview-small">
-                    Development languages
-                </div>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        CLOUD & INFRASTRUCTURE
-                    </div>
-
-                    <div class="overview-icon">
-                        ☁
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ cloud_count }}
-                </div>
-
-                <div class="overview-small">
-                    Cloud platforms & infrastructure
-                </div>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <div class="overview-top">
-
-                    <div class="overview-label">
-                        SECURITY TOOLS
-                    </div>
-
-                    <div class="overview-icon">
-                        🛡
-                    </div>
-
-                </div>
-
-                <div class="overview-number">
-                    {{ security_count }}
-                </div>
-
-                <div class="overview-small">
-                    Security technologies
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ================= TECHNOLOGY ENVIRONMENT ================= -->
-
-        <div class="environment-heading">
-
-            <h2>
-                Technology Environment
-            </h2>
-
-            <span>
-                Manage your organization's technology stack
-            </span>
-
-        </div>
-
+        <!-- =================================================
+             TECHNOLOGY GRID
+        ================================================= -->
 
         <div class="technology-grid">
 
 
-            <!-- ================================================= -->
-            <!-- OPERATING SYSTEMS -->
-            <!-- ================================================= -->
+            <!-- =================================================
+                 OPERATING SYSTEMS
+            ================================================= -->
 
             <div class="technology-card">
 
-                <div class="card-header">
+                <div class="card-top">
 
                     <div class="card-title">
 
                         <div class="category-icon">
-                            🖥
+                            🖥️
                         </div>
 
                         <div>
@@ -1038,29 +854,38 @@
                                 Operating Systems
                             </h3>
 
-                            <p>
-                                {{ os_count }} configured technologies
-                            </p>
+                            <div class="category-count">
+                                {{ grouped.os|length }} configured technologies
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <button class="card-add" onclick="openAddModal('os')">
+                    <button type="button" class="add-btn" data-category="os"
+                        onclick="openAddModal(this.dataset.category)">
+
                         + Add
+
                     </button>
 
                 </div>
+
+
+                <p>
+                    Track operating systems such as Windows,
+                    Linux and other server environments.
+                </p>
 
 
                 <div class="tech-list">
 
                     {% for tech in grouped.os %}
 
-                    <div class="tech-row">
+                    <div class="tech-item">
 
-                        <div class="tech-info">
+                        <div>
 
                             <div class="tech-name">
                                 {{ tech.name }}
@@ -1088,18 +913,20 @@
                             {% endif %}
 
 
-                            <button type="button" class="icon-btn edit-btn" title="Edit technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}"
-                                data-version="{{ tech.version|default:'' }}"
-                                data-description="{{ tech.description|default:'' }}" data-category="{{ tech.category }}"
-                                onclick="openEditModal(this)">
+                            <button type="button" class="icon-btn edit-btn edit-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}" data-version="{{ tech.version|default:'' }}"
+                                data-description="{{ tech.description|default:'' }}" data-category="os">
+
                                 ✏
+
                             </button>
 
 
-                            <button type="button" class="icon-btn delete-btn" title="Delete technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}" onclick="openDeleteModal(this)">
+                            <button type="button" class="icon-btn delete-btn delete-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}">
+
                                 🗑
+
                             </button>
 
                         </div>
@@ -1108,8 +935,8 @@
 
                     {% empty %}
 
-                    <div class="empty">
-                        No operating systems configured.
+                    <div class="empty-tech">
+                        No operating systems added yet.
                     </div>
 
                     {% endfor %}
@@ -1119,13 +946,14 @@
             </div>
 
 
-            <!-- ================================================= -->
-            <!-- WEB -->
-            <!-- ================================================= -->
+
+            <!-- =================================================
+                 WEB TECHNOLOGIES
+            ================================================= -->
 
             <div class="technology-card">
 
-                <div class="card-header">
+                <div class="card-top">
 
                     <div class="card-title">
 
@@ -1139,29 +967,38 @@
                                 Web Technologies
                             </h3>
 
-                            <p>
-                                {{ web_count }} configured technologies
-                            </p>
+                            <div class="category-count">
+                                {{ grouped.web|length }} configured technologies
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <button class="card-add" onclick="openAddModal('web')">
+                    <button type="button" class="add-btn" data-category="web"
+                        onclick="openAddModal(this.dataset.category)">
+
                         + Add
+
                     </button>
 
                 </div>
+
+
+                <p>
+                    Manage web servers, frameworks and
+                    web technologies used by the organization.
+                </p>
 
 
                 <div class="tech-list">
 
                     {% for tech in grouped.web %}
 
-                    <div class="tech-row">
+                    <div class="tech-item">
 
-                        <div class="tech-info">
+                        <div>
 
                             <div class="tech-name">
                                 {{ tech.name }}
@@ -1181,22 +1018,28 @@
                         <div class="tech-right">
 
                             {% if tech.version %}
+
                             <span class="version">
                                 {{ tech.version }}
                             </span>
+
                             {% endif %}
 
-                            <button type="button" class="icon-btn edit-btn" title="Edit technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}"
-                                data-version="{{ tech.version|default:'' }}"
-                                data-description="{{ tech.description|default:'' }}" data-category="{{ tech.category }}"
-                                onclick="openEditModal(this)">
+
+                            <button type="button" class="icon-btn edit-btn edit-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}" data-version="{{ tech.version|default:'' }}"
+                                data-description="{{ tech.description|default:'' }}" data-category="web">
+
                                 ✏
+
                             </button>
 
-                            <button type="button" class="icon-btn delete-btn" title="Delete technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}" onclick="openDeleteModal(this)">
+
+                            <button type="button" class="icon-btn delete-btn delete-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}">
+
                                 🗑
+
                             </button>
 
                         </div>
@@ -1205,8 +1048,8 @@
 
                     {% empty %}
 
-                    <div class="empty">
-                        No web technologies configured.
+                    <div class="empty-tech">
+                        No web technologies added yet.
                     </div>
 
                     {% endfor %}
@@ -1216,18 +1059,19 @@
             </div>
 
 
-            <!-- ================================================= -->
-            <!-- DATABASE -->
-            <!-- ================================================= -->
+
+            <!-- =================================================
+                 DATABASES
+            ================================================= -->
 
             <div class="technology-card">
 
-                <div class="card-header">
+                <div class="card-top">
 
                     <div class="card-title">
 
                         <div class="category-icon">
-                            🗄
+                            🗄️
                         </div>
 
                         <div>
@@ -1236,29 +1080,38 @@
                                 Databases
                             </h3>
 
-                            <p>
-                                {{ database_count }} configured technologies
-                            </p>
+                            <div class="category-count">
+                                {{ grouped.database|length }} configured technologies
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <button class="card-add" onclick="openAddModal('database')">
+                    <button type="button" class="add-btn" data-category="database"
+                        onclick="openAddModal(this.dataset.category)">
+
                         + Add
+
                     </button>
 
                 </div>
+
+
+                <p>
+                    Track database technologies used for
+                    storing and managing organizational data.
+                </p>
 
 
                 <div class="tech-list">
 
                     {% for tech in grouped.database %}
 
-                    <div class="tech-row">
+                    <div class="tech-item">
 
-                        <div class="tech-info">
+                        <div>
 
                             <div class="tech-name">
                                 {{ tech.name }}
@@ -1278,22 +1131,28 @@
                         <div class="tech-right">
 
                             {% if tech.version %}
+
                             <span class="version">
                                 {{ tech.version }}
                             </span>
+
                             {% endif %}
 
-                            <button type="button" class="icon-btn edit-btn" title="Edit technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}"
-                                data-version="{{ tech.version|default:'' }}"
-                                data-description="{{ tech.description|default:'' }}" data-category="{{ tech.category }}"
-                                onclick="openEditModal(this)">
+
+                            <button type="button" class="icon-btn edit-btn edit-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}" data-version="{{ tech.version|default:'' }}"
+                                data-description="{{ tech.description|default:'' }}" data-category="database">
+
                                 ✏
+
                             </button>
 
-                            <button type="button" class="icon-btn delete-btn" title="Delete technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}" onclick="openDeleteModal(this)">
+
+                            <button type="button" class="icon-btn delete-btn delete-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}">
+
                                 🗑
+
                             </button>
 
                         </div>
@@ -1302,8 +1161,8 @@
 
                     {% empty %}
 
-                    <div class="empty">
-                        No databases configured.
+                    <div class="empty-tech">
+                        No databases added yet.
                     </div>
 
                     {% endfor %}
@@ -1313,13 +1172,14 @@
             </div>
 
 
-            <!-- ================================================= -->
-            <!-- PROGRAMMING LANGUAGES -->
-            <!-- ================================================= -->
+
+            <!-- =================================================
+                 PROGRAMMING LANGUAGES
+            ================================================= -->
 
             <div class="technology-card">
 
-                <div class="card-header">
+                <div class="card-top">
 
                     <div class="card-title">
 
@@ -1333,29 +1193,38 @@
                                 Programming Languages
                             </h3>
 
-                            <p>
-                                {{ language_count }} configured technologies
-                            </p>
+                            <div class="category-count">
+                                {{ grouped.language|length }} configured technologies
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <button class="card-add" onclick="openAddModal('language')">
+                    <button type="button" class="add-btn" data-category="language"
+                        onclick="openAddModal(this.dataset.category)">
+
                         + Add
+
                     </button>
 
                 </div>
+
+
+                <p>
+                    Maintain programming languages used
+                    across the organization's applications.
+                </p>
 
 
                 <div class="tech-list">
 
                     {% for tech in grouped.language %}
 
-                    <div class="tech-row">
+                    <div class="tech-item">
 
-                        <div class="tech-info">
+                        <div>
 
                             <div class="tech-name">
                                 {{ tech.name }}
@@ -1375,22 +1244,28 @@
                         <div class="tech-right">
 
                             {% if tech.version %}
+
                             <span class="version">
                                 {{ tech.version }}
                             </span>
+
                             {% endif %}
 
-                            <button type="button" class="icon-btn edit-btn" title="Edit technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}"
-                                data-version="{{ tech.version|default:'' }}"
-                                data-description="{{ tech.description|default:'' }}" data-category="{{ tech.category }}"
-                                onclick="openEditModal(this)">
+
+                            <button type="button" class="icon-btn edit-btn edit-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}" data-version="{{ tech.version|default:'' }}"
+                                data-description="{{ tech.description|default:'' }}" data-category="language">
+
                                 ✏
+
                             </button>
 
-                            <button type="button" class="icon-btn delete-btn" title="Delete technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}" onclick="openDeleteModal(this)">
+
+                            <button type="button" class="icon-btn delete-btn delete-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}">
+
                                 🗑
+
                             </button>
 
                         </div>
@@ -1399,8 +1274,8 @@
 
                     {% empty %}
 
-                    <div class="empty">
-                        No programming languages configured.
+                    <div class="empty-tech">
+                        No programming languages added yet.
                     </div>
 
                     {% endfor %}
@@ -1410,18 +1285,19 @@
             </div>
 
 
-            <!-- ================================================= -->
-            <!-- CLOUD -->
-            <!-- ================================================= -->
+
+            <!-- =================================================
+                 CLOUD
+            ================================================= -->
 
             <div class="technology-card">
 
-                <div class="card-header">
+                <div class="card-top">
 
                     <div class="card-title">
 
                         <div class="category-icon">
-                            ☁
+                            ☁️
                         </div>
 
                         <div>
@@ -1430,29 +1306,38 @@
                                 Cloud & Infrastructure
                             </h3>
 
-                            <p>
-                                {{ cloud_count }} configured technologies
-                            </p>
+                            <div class="category-count">
+                                {{ grouped.cloud|length }} configured technologies
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <button class="card-add" onclick="openAddModal('cloud')">
+                    <button type="button" class="add-btn" data-category="cloud"
+                        onclick="openAddModal(this.dataset.category)">
+
                         + Add
+
                     </button>
 
                 </div>
+
+
+                <p>
+                    Track cloud platforms and infrastructure
+                    used by the organization.
+                </p>
 
 
                 <div class="tech-list">
 
                     {% for tech in grouped.cloud %}
 
-                    <div class="tech-row">
+                    <div class="tech-item">
 
-                        <div class="tech-info">
+                        <div>
 
                             <div class="tech-name">
                                 {{ tech.name }}
@@ -1472,22 +1357,28 @@
                         <div class="tech-right">
 
                             {% if tech.version %}
+
                             <span class="version">
                                 {{ tech.version }}
                             </span>
+
                             {% endif %}
 
-                            <button type="button" class="icon-btn edit-btn" title="Edit technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}"
-                                data-version="{{ tech.version|default:'' }}"
-                                data-description="{{ tech.description|default:'' }}" data-category="{{ tech.category }}"
-                                onclick="openEditModal(this)">
+
+                            <button type="button" class="icon-btn edit-btn edit-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}" data-version="{{ tech.version|default:'' }}"
+                                data-description="{{ tech.description|default:'' }}" data-category="cloud">
+
                                 ✏
+
                             </button>
 
-                            <button type="button" class="icon-btn delete-btn" title="Delete technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}" onclick="openDeleteModal(this)">
+
+                            <button type="button" class="icon-btn delete-btn delete-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}">
+
                                 🗑
+
                             </button>
 
                         </div>
@@ -1496,8 +1387,8 @@
 
                     {% empty %}
 
-                    <div class="empty">
-                        No cloud or infrastructure technologies configured.
+                    <div class="empty-tech">
+                        No cloud platforms added yet.
                     </div>
 
                     {% endfor %}
@@ -1507,18 +1398,19 @@
             </div>
 
 
-            <!-- ================================================= -->
-            <!-- SECURITY -->
-            <!-- ================================================= -->
+
+            <!-- =================================================
+                 SECURITY TOOLS
+            ================================================= -->
 
             <div class="technology-card">
 
-                <div class="card-header">
+                <div class="card-top">
 
                     <div class="card-title">
 
                         <div class="category-icon">
-                            🛡
+                            🛡️
                         </div>
 
                         <div>
@@ -1527,29 +1419,38 @@
                                 Security Tools
                             </h3>
 
-                            <p>
-                                {{ security_count }} configured technologies
-                            </p>
+                            <div class="category-count">
+                                {{ grouped.security|length }} configured technologies
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <button class="card-add" onclick="openAddModal('security')">
+                    <button type="button" class="add-btn" data-category="security"
+                        onclick="openAddModal(this.dataset.category)">
+
                         + Add
+
                     </button>
 
                 </div>
+
+
+                <p>
+                    Manage security tools and infrastructure
+                    used for cybersecurity operations.
+                </p>
 
 
                 <div class="tech-list">
 
                     {% for tech in grouped.security %}
 
-                    <div class="tech-row">
+                    <div class="tech-item">
 
-                        <div class="tech-info">
+                        <div>
 
                             <div class="tech-name">
                                 {{ tech.name }}
@@ -1569,22 +1470,28 @@
                         <div class="tech-right">
 
                             {% if tech.version %}
+
                             <span class="version">
                                 {{ tech.version }}
                             </span>
+
                             {% endif %}
 
-                            <button type="button" class="icon-btn edit-btn" title="Edit technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}"
-                                data-version="{{ tech.version|default:'' }}"
-                                data-description="{{ tech.description|default:'' }}" data-category="{{ tech.category }}"
-                                onclick="openEditModal(this)">
+
+                            <button type="button" class="icon-btn edit-btn edit-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}" data-version="{{ tech.version|default:'' }}"
+                                data-description="{{ tech.description|default:'' }}" data-category="security">
+
                                 ✏
+
                             </button>
 
-                            <button type="button" class="icon-btn delete-btn" title="Delete technology"
-                                data-id="{{ tech.id }}" data-name="{{ tech.name }}" onclick="openDeleteModal(this)">
+
+                            <button type="button" class="icon-btn delete-btn delete-tech" data-id="{{ tech.id }}"
+                                data-name="{{ tech.name }}">
+
                                 🗑
+
                             </button>
 
                         </div>
@@ -1593,8 +1500,8 @@
 
                     {% empty %}
 
-                    <div class="empty">
-                        No security tools configured.
+                    <div class="empty-tech">
+                        No security tools added yet.
                     </div>
 
                     {% endfor %}
@@ -1607,12 +1514,16 @@
         </div>
 
 
-        <!-- ================= FOOTER ================= -->
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
 
         <footer>
 
             <span>
-                <strong>CYVORA</strong> · Technology Intelligence
+                <strong>CYVORA</strong>
+                · Technology Intelligence
             </span>
 
             <span>
@@ -1621,332 +1532,427 @@
 
         </footer>
 
+    </div>
 
-        <!-- ================================================= -->
-        <!-- ADD MODAL -->
-        <!-- ================================================= -->
 
-        <div class="modal-overlay" id="addModal">
 
-            <div class="modal">
+    <!-- =====================================================
+         ADD MODAL
+    ===================================================== -->
 
-                <h3>
-                    Add Technology
-                </h3>
+    <div class="modal-overlay" id="addModal">
 
-                <div class="modal-subtitle">
-                    Add a technology to your organization's security profile.
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h3>
+                        Add Technology
+                    </h3>
+
+                    <span>
+                        Add a technology to your security profile
+                    </span>
+
                 </div>
 
+                <button type="button" class="modal-close" onclick="closeModal('addModal')">
 
-                <form method="POST">
+                    ×
 
-                    {% csrf_token %}
-
-                    <input type="hidden" name="action" value="add">
-
-                    <input type="hidden" name="category" id="addCategory">
-
-
-                    <label>
-                        Technology Name
-                    </label>
-
-                    <input type="text" name="name" placeholder="e.g. PostgreSQL" required>
-
-
-                    <label>
-                        Version
-                    </label>
-
-                    <input type="text" name="version" placeholder="e.g. 16">
-
-
-                    <label>
-                        Description
-                    </label>
-
-                    <textarea name="description" rows="3" placeholder="Optional description..."></textarea>
-
-
-                    <div class="modal-actions">
-
-                        <button type="button" class="cancel" onclick="closeAddModal()">
-                            Cancel
-                        </button>
-
-                        <button type="submit" class="save">
-                            Save Technology
-                        </button>
-
-                    </div>
-
-                </form>
+                </button>
 
             </div>
 
-        </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="action" value="add">
+
+                <input type="hidden" name="category" id="addCategory">
 
 
-        <!-- ================================================= -->
-        <!-- EDIT MODAL -->
-        <!-- ================================================= -->
+                <label>
+                    Technology Name
+                </label>
 
-        <div class="modal-overlay" id="editModal">
+                <input type="text" name="name" required placeholder="e.g. Windows Server">
 
-            <div class="modal">
 
-                <h3>
-                    Edit Technology
-                </h3>
+                <label>
+                    Version
+                </label>
 
-                <div class="modal-subtitle">
-                    Update technology information.
+                <input type="text" name="version" placeholder="e.g. 2022">
+
+
+                <label>
+                    Description
+                </label>
+
+                <textarea name="description" rows="3" placeholder="Optional description"></textarea>
+
+
+                <div class="modal-actions">
+
+                    <button type="button" class="btn-cancel" onclick="closeModal('addModal')">
+
+                        Cancel
+
+                    </button>
+
+                    <button type="submit" class="btn-save">
+
+                        Save Technology
+
+                    </button>
+
                 </div>
 
+            </form>
 
-                <form method="POST">
+        </div>
 
-                    {% csrf_token %}
-
-                    <input type="hidden" name="action" value="edit">
-
-                    <input type="hidden" name="technology_id" id="editId">
+    </div>
 
 
-                    <label>
-                        Technology Name
-                    </label>
 
-                    <input type="text" name="name" id="editName" required>
+    <!-- =====================================================
+         EDIT MODAL
+    ===================================================== -->
 
+    <div class="modal-overlay" id="editModal">
 
-                    <label>
-                        Version
-                    </label>
+        <div class="modal-box">
 
-                    <input type="text" name="version" id="editVersion">
+            <div class="modal-header">
 
+                <div>
 
-                    <label>
-                        Category
-                    </label>
+                    <h3>
+                        Edit Technology
+                    </h3>
 
-                    <select name="category" id="editCategory">
+                    <span>
+                        Update your technology profile
+                    </span>
 
-                        <option value="os">
-                            Operating Systems
-                        </option>
+                </div>
 
-                        <option value="web">
-                            Web Technologies
-                        </option>
+                <button type="button" class="modal-close" onclick="closeModal('editModal')">
 
-                        <option value="database">
-                            Databases
-                        </option>
+                    ×
 
-                        <option value="language">
-                            Programming Languages
-                        </option>
-
-                        <option value="cloud">
-                            Cloud & Infrastructure
-                        </option>
-
-                        <option value="security">
-                            Security Tools
-                        </option>
-
-                    </select>
-
-
-                    <label>
-                        Description
-                    </label>
-
-                    <textarea name="description" id="editDescription" rows="3"></textarea>
-
-
-                    <div class="modal-actions">
-
-                        <button type="button" class="cancel" onclick="closeEditModal()">
-                            Cancel
-                        </button>
-
-                        <button type="submit" class="save">
-                            Save Changes
-                        </button>
-
-                    </div>
-
-                </form>
+                </button>
 
             </div>
 
-        </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="action" value="edit">
+
+                <input type="hidden" name="technology_id" id="editTechnologyId">
 
 
-        <!-- ================================================= -->
-        <!-- DELETE MODAL -->
-        <!-- ================================================= -->
+                <label>
+                    Technology Name
+                </label>
 
-        <div class="modal-overlay" id="deleteModal">
+                <input type="text" name="name" id="editName" required>
 
-            <div class="modal delete-modal">
 
-                <div class="warning-icon">
-                    !
+                <label>
+                    Version
+                </label>
+
+                <input type="text" name="version" id="editVersion">
+
+
+                <label>
+                    Description
+                </label>
+
+                <textarea name="description" id="editDescription" rows="3"></textarea>
+
+
+                <label>
+                    Category
+                </label>
+
+                <select name="category" id="editCategory">
+
+                    <option value="os">
+                        Operating Systems
+                    </option>
+
+                    <option value="web">
+                        Web Technologies
+                    </option>
+
+                    <option value="database">
+                        Databases
+                    </option>
+
+                    <option value="language">
+                        Programming Languages
+                    </option>
+
+                    <option value="cloud">
+                        Cloud Platforms
+                    </option>
+
+                    <option value="security">
+                        Security Tools
+                    </option>
+
+                </select>
+
+
+                <div class="modal-actions">
+
+                    <button type="button" class="btn-cancel" onclick="closeModal('editModal')">
+
+                        Cancel
+
+                    </button>
+
+                    <button type="submit" class="btn-save">
+
+                        Update Technology
+
+                    </button>
+
                 </div>
 
-                <h3>
-                    Remove Technology?
-                </h3>
-
-                <p>
-                    Are you sure you want to remove
-                    <strong id="deleteName"></strong>
-                    from your technology stack?
-                </p>
-
-
-                <form method="POST">
-
-                    {% csrf_token %}
-
-                    <input type="hidden" name="action" value="delete">
-
-                    <input type="hidden" name="technology_id" id="deleteId">
-
-
-                    <div class="modal-actions">
-
-                        <button type="button" class="cancel" onclick="closeDeleteModal()">
-                            Cancel
-                        </button>
-
-                        <button type="submit" class="confirm-delete">
-                            Delete Technology
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </div>
+            </form>
 
         </div>
 
-
-        <!-- ================================================= -->
-        <!-- JAVASCRIPT -->
-        <!-- ================================================= -->
-
-        <script>
-
-            /* ================= ADD ================= */
-
-            function openAddModal(category) {
-
-                document.getElementById("addCategory").value = category;
-
-                document.getElementById("addModal")
-                    .classList.add("active");
-            }
+    </div>
 
 
-            function closeAddModal() {
 
-                document.getElementById("addModal")
-                    .classList.remove("active");
-            }
+    <!-- =====================================================
+         DELETE MODAL
+    ===================================================== -->
 
+    <div class="modal-overlay" id="deleteModal">
 
-            /* ================= EDIT ================= */
+        <div class="modal-box delete-box">
 
-            function openEditModal(button) {
+            <div class="warning-icon">
+                !
+            </div>
 
-                document.getElementById("editId").value =
-                    button.dataset.id;
+            <h3>
+                Delete Technology?
+            </h3>
 
-                document.getElementById("editName").value =
-                    button.dataset.name;
-
-                document.getElementById("editVersion").value =
-                    button.dataset.version;
-
-                document.getElementById("editDescription").value =
-                    button.dataset.description;
-
-                document.getElementById("editCategory").value =
-                    button.dataset.category;
-
-                document.getElementById("editModal")
-                    .classList.add("active");
-            }
+            <p>
+                Are you sure you want to remove
+                <strong id="deleteTechnologyName"></strong>
+                from your technology profile?
+            </p>
 
 
-            function closeEditModal() {
+            <form method="POST">
 
-                document.getElementById("editModal")
-                    .classList.remove("active");
-            }
+                {% csrf_token %}
 
+                <input type="hidden" name="action" value="delete">
 
-            /* ================= DELETE ================= */
-
-            function openDeleteModal(button) {
-
-                document.getElementById("deleteId").value =
-                    button.dataset.id;
-
-                document.getElementById("deleteName").textContent =
-                    button.dataset.name;
-
-                document.getElementById("deleteModal")
-                    .classList.add("active");
-            }
+                <input type="hidden" name="technology_id" id="deleteTechnologyId">
 
 
-            function closeDeleteModal() {
+                <div class="modal-actions">
 
-                document.getElementById("deleteModal")
-                    .classList.remove("active");
-            }
+                    <button type="button" class="btn-cancel" onclick="closeModal('deleteModal')">
 
+                        Cancel
 
-            /* ================= CLOSE ON OUTSIDE CLICK ================= */
+                    </button>
 
-            window.addEventListener("click", function (event) {
+                    <button type="submit" class="btn-delete">
 
-                const addModal =
-                    document.getElementById("addModal");
+                        Delete Technology
 
-                const editModal =
-                    document.getElementById("editModal");
+                    </button>
 
-                const deleteModal =
-                    document.getElementById("deleteModal");
+                </div>
 
+            </form>
 
-                if (event.target === addModal) {
-                    closeAddModal();
-                }
+        </div>
+
+    </div>
 
 
-                if (event.target === editModal) {
-                    closeEditModal();
-                }
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =================================================
+           OPEN ADD MODAL
+        ================================================= */
+
+        function openAddModal(category) {
+
+            document.getElementById("addCategory").value = category;
+
+            document
+                .getElementById("addModal")
+                .classList.add("active");
+        }
 
 
-                if (event.target === deleteModal) {
-                    closeDeleteModal();
-                }
+        /* =================================================
+           OPEN EDIT MODAL
+        ================================================= */
+
+        function openEditModal(button) {
+
+            const id = button.dataset.id;
+            const name = button.dataset.name;
+            const version = button.dataset.version;
+            const description = button.dataset.description;
+            const category = button.dataset.category;
+
+
+            document.getElementById("editTechnologyId").value = id;
+
+            document.getElementById("editName").value = name;
+
+            document.getElementById("editVersion").value = version;
+
+            document.getElementById("editDescription").value =
+                description;
+
+            document.getElementById("editCategory").value =
+                category;
+
+
+            document
+                .getElementById("editModal")
+                .classList.add("active");
+        }
+
+
+        /* =================================================
+           OPEN DELETE MODAL
+        ================================================= */
+
+        function openDeleteModal(button) {
+
+            const id = button.dataset.id;
+            const name = button.dataset.name;
+
+
+            document.getElementById("deleteTechnologyId").value = id;
+
+            document.getElementById("deleteTechnologyName").textContent =
+                name;
+
+
+            document
+                .getElementById("deleteModal")
+                .classList.add("active");
+        }
+
+
+        /* =================================================
+           CLOSE MODAL
+        ================================================= */
+
+        function closeModal(modalId) {
+
+            document
+                .getElementById(modalId)
+                .classList.remove("active");
+        }
+
+
+        /* =================================================
+           EDIT BUTTON EVENTS
+        ================================================= */
+
+        document.querySelectorAll(".edit-tech").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                openEditModal(this);
 
             });
 
-        </script>
+        });
 
+
+        /* =================================================
+           DELETE BUTTON EVENTS
+        ================================================= */
+
+        document.querySelectorAll(".delete-tech").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                openDeleteModal(this);
+
+            });
+
+        });
+
+
+        /* =================================================
+           CLOSE WHEN CLICKING OUTSIDE MODAL
+        ================================================= */
+
+        document
+            .querySelectorAll(".modal-overlay")
+            .forEach(function (modal) {
+
+                modal.addEventListener("click", function (event) {
+
+                    if (event.target === modal) {
+
+                        modal.classList.remove("active");
+
+                    }
+
+                });
+
+            });
+
+
+        /* =================================================
+           ESC KEY CLOSE
+        ================================================= */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (event.key === "Escape") {
+
+                document
+                    .querySelectorAll(".modal-overlay.active")
+                    .forEach(function (modal) {
+
+                        modal.classList.remove("active");
+
+                    });
+
+            }
+
+        });
+
+    </script>
 
 </body>
 
