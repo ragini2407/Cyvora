@@ -27,11 +27,11 @@ load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = [
+    "cyvora-23m1.onrender.com",
+]
 # =========================================================
 # APPLICATIONS
 # =========================================================
