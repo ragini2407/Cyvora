@@ -8,6 +8,7 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv
+import dj_database_url
 
 
 # =========================================================
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 
     "accounts",
 ]
+
 
 # =========================================================
 # MIDDLEWARE
@@ -108,14 +110,17 @@ WSGI_APPLICATION = "cyvora.wsgi.application"
 # =========================================================
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "cyvora_db"),
-        "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASSWORD","postgres"),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "5432"),
-    }
+    "default": dj_database_url.config(
+        default=(
+            f"postgresql://"
+            f"{os.getenv('DB_USER', 'postgres')}:"
+            f"{os.getenv('DB_PASSWORD', 'postgres')}@"
+            f"{os.getenv('DB_HOST', 'localhost')}:"
+            f"{os.getenv('DB_PORT', '5432')}/"
+            f"{os.getenv('DB_NAME', 'cyvora_db')}"
+        ),
+        conn_max_age=600,
+    )
 }
 
 
