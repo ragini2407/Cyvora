@@ -32,6 +32,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "cyvora-23m1.onrender.com",
     ".onrender.com",
+    "127.0.0.1",
+    "localhost",
 ]
 # =========================================================
 # APPLICATIONS
@@ -65,12 +67,12 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
     "allauth.account.middleware.AccountMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-
 # =========================================================
 # URL CONFIGURATION
 # =========================================================
@@ -163,8 +165,7 @@ USE_TZ = True
 # =========================================================
 
 STATIC_URL = "static/"
-
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # =========================================================
 # DEFAULT PRIMARY KEY
 # =========================================================
