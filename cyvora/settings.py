@@ -29,7 +29,10 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["cyvora-23m1.onrender.com"]
+ALLOWED_HOSTS = [
+    "cyvora-23m1.onrender.com",
+    ".onrender.com",
+]
 # =========================================================
 # APPLICATIONS
 # =========================================================
